@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { TextInput } from "react-native-gesture-handler";
 
 export default function Navigation() {
   return (
@@ -12,6 +13,9 @@ export default function Navigation() {
       </View>
       <View style={styles.container}>
         <Text onPress={()=>{}}>Save</Text>
+      </View>
+      <View>
+        <TextInput></TextInput>
       </View>
     </>
   );

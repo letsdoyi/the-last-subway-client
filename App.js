@@ -4,23 +4,27 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import combinedReducer from "./Reducers";
-import Setting from "./Components/Home";
-import Home from "./Components/Setting";
-// import Navigation from "./Containers/Navigation";
+import Home from "./Components/Home";
+import Setting from "./Components/Setting";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
 // Create our stack navigator
-let RootStack = createStackNavigator({
-  Home: Home,
-  Setting: Setting
-});
+let AppNavigator = createStackNavigator(
+  {
+    Home: Home,
+    Setting: Setting
+  },
+  {
+    initialRouteName: "Home"
+  }
+);
 
 // Connect the screens to Redux
 // let App = connect(state => );
 
 // And the app container
-let Navigation = createAppContainer(RootStack);
+let AppContainer = createAppContainer(AppNavigator);
 // import * as serviceWorker from './serviceWorker';
 
 const store = createStore(
@@ -33,7 +37,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <Navigation />
+        <AppContainer />
       </Provider>
     );
   }
