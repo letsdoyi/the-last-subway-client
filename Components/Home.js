@@ -1,21 +1,19 @@
-import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import React from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
-export default function Navigation(props) {
-
+export default function Home(props) {
   return (
     <>
       <View style={styles.container}>
         <Text>Home</Text>
         <Button
-          title="Go to Setting"
+          title="Set Alarm"
           onPress={() => {
-            props.navigation.navigate("Setting", {
+            props.navigation.navigate('SetAlarm', {
               itemId: 86,
-              otherParam: "anything you want here"
+              otherParam: 'anything you want here',
             });
-          }}
-        ></Button>
+          }}></Button>
       </View>
     </>
   );
@@ -24,8 +22,8 @@ export default function Navigation(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
