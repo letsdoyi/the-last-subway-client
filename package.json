@@ -24,5 +24,13 @@
   "devDependencies": {
     "babel-preset-expo": "^7.1.0"
   },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true,
+    "bracketSpacing": true,
+    "jsxBracketSameLine": true
+  },
   "private": true
 }
