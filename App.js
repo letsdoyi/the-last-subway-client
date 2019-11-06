@@ -12,7 +12,9 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 const store = createStore(
-  combinedReducer
+  combinedReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ &&
+    window.__REDUX_DEVTOOLS_EXTENSION__(),
   // composeWithDevTools(applyMiddleware(...middlewares))
 );
 

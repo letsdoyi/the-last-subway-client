@@ -1,9 +1,3 @@
-import React from 'react';
-// import ReactDOM from 'react-dom';
-// import { BrowserRouter as Router } from 'react-router-dom';
-// import { Provider } from 'react-redux';
-// import { createStore, applyMiddleware } from 'redux';
-// import { composeWithDevTools } from 'redux-devtools-extension';
 import Home from '../Components/Home';
 import SetAlarm from '../Components/SetAlarm';
 import { createAppContainer } from 'react-navigation';
