@@ -6,6 +6,7 @@ import credentials from '../credentials';
 
 export default function MapInput(props) {
   console.log('MapInput props:', props);
+  const { screenProps } = props;
   const { GOOGLE } = credentials;
 
   return (
@@ -18,7 +19,7 @@ export default function MapInput(props) {
         components="country:us">
         {({ inputValue, handleTextChange, locationResults, fetchDetails }) => (
           <Fragment>
-            {console.log('locationResults', locationResults)}
+            {/* {console.log('locationResults', locationResults)} */}
             <TextInput
               style={{
                 height: 40,
@@ -27,7 +28,10 @@ export default function MapInput(props) {
                 paddingHorizontal: 16,
               }}
               value={inputValue}
-              onChangeText={handleTextChange}
+              onChangeText={fromInputValue => {
+                screenProps.onFromInputChange(fromInputValue);
+                handleTextChange(fromInputValue);
+              }}
               placeholder={'Current Location'}
             />
             <ScrollView style={{ maxHeight: 100 }}>
@@ -51,7 +55,7 @@ export default function MapInput(props) {
         components="country:us">
         {({ inputValue, handleTextChange, locationResults, fetchDetails }) => (
           <Fragment>
-            {console.log('locationResults', locationResults)}
+            {/* {console.log('locationResults', locationResults)} */}
             <TextInput
               style={{
                 height: 40,
