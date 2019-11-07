@@ -1,13 +1,16 @@
 import React, { Fragment } from 'react';
 import { GoogleAutoComplete } from 'react-native-google-autocomplete';
 import { TextInput, ScrollView, Button, Dimensions } from 'react-native';
+import common from '../Constants/common';
 import LocationItem from './LocationItem';
 import credentials from '../credentials';
+
+const { CURRENT_LOCATION } = common;
+const { GOOGLE } = credentials;
 
 export default function MapInput(props) {
   console.log('MapInput props:', props);
   const { screenProps } = props;
-  const { GOOGLE } = credentials;
 
   return (
     <>
@@ -19,7 +22,7 @@ export default function MapInput(props) {
         components="country:us">
         {({ inputValue, handleTextChange, locationResults, fetchDetails }) => (
           <Fragment>
-            {/* {console.log('locationResults', locationResults)} */}
+            {console.log('inputValue', inputValue)}
             <TextInput
               style={{
                 height: 40,
@@ -32,7 +35,7 @@ export default function MapInput(props) {
                 screenProps.onFromInputChange(fromInputValue);
                 handleTextChange(fromInputValue);
               }}
-              placeholder={'Current Location'}
+              placeholder={CURRENT_LOCATION}
             />
             <ScrollView style={{ maxHeight: 100 }}>
               {locationResults.map((el, i) => (
@@ -52,7 +55,7 @@ export default function MapInput(props) {
         debounce={300}
         language="en"
         minLength={2}
-        components="country:us">
+        components="country:ko">
         {({ inputValue, handleTextChange, locationResults, fetchDetails }) => (
           <Fragment>
             {/* {console.log('locationResults', locationResults)} */}
@@ -63,7 +66,7 @@ export default function MapInput(props) {
                 borderWidth: 1,
                 paddingHorizontal: 16,
               }}
-              value={inputValue}
+              value={screenProps.to.value || inputValue}
               onChangeText={handleTextChange}
               placeholder={'Where to?'}
             />

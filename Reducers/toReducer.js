@@ -1,10 +1,12 @@
+import common from '../Constants/common';
 import actionTypes from '../Constants/actionTypes';
+
+const { CURRENT_LOCATION } = common;
 const {
   GOT_CURRENT_LOCATION,
   SET_VALUE_OF_TO,
   CHANGED_MARKER_LOCATION,
 } = actionTypes;
-
 const initialState = {
   value: '',
   location: {
@@ -17,7 +19,7 @@ export function toReducer(state = initialState, action) {
   switch (action.type) {
     case GOT_CURRENT_LOCATION:
       return {
-        value: 'Current Location',
+        value: 'WHERE TO',
         location: {
           latitude: action.data[0],
           longitude: action.data[1],
@@ -34,7 +36,6 @@ export function toReducer(state = initialState, action) {
       };
 
     case SET_VALUE_OF_TO:
-      console.log('toReducer SET_VALUE_OF_TO ON');
       return {
         ...state,
         value: action.data,

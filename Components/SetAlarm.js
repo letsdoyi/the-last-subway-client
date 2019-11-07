@@ -1,6 +1,6 @@
 import React from 'react';
 import MyMapContainer from './MyMapContainer';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
 export default function SetAlarm(props) {
@@ -20,7 +20,7 @@ export default function SetAlarm(props) {
         {/* <TextInput placeholder="Where to?" /> */}
         <MyMapContainer style={styles.container} screenProps={props.screenProps}/>
       </View>
-      {/* <View style={styles.container}>
+      <View style={styles.container}>
         <Text style={styles.title}>AHEAD OF TIME ACTIVE</Text>
         <View style={styles.list}>
           <Button title="5 mins"></Button>
@@ -30,7 +30,7 @@ export default function SetAlarm(props) {
           <Button title="1.5 hours"></Button>
           <Button title="2 hours"></Button>
         </View>
-      </View> */}
+      </View>
     </View>
   );
 }
@@ -45,13 +45,22 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   container: {
-    minHeight: 20
-    // flexDirection: 'column',
+    minHeight: 20,
+    flexDirection: 'column',
     // backgroundColor: '#ddd'
   },
   list:{
-    // flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
   },
+  flexOne:{
+    flex: 1
+  },
+
+  flexTwo:{
+    flex: 2
+  },
+
   front:{
     zIndex:100
   }

@@ -1,4 +1,6 @@
+import common from '../Constants/common';
 import actionTypes from '../Constants/actionTypes';
+const { CURRENT_LOCATION } = common;
 const { GOT_CURRENT_LOCATION, TYPED_FROM } = actionTypes;
 const initialState = {
   value: '',
@@ -12,7 +14,7 @@ export function fromReducer(state = initialState, action) {
   switch (action.type) {
     case GOT_CURRENT_LOCATION:
       return {
-        value: 'Current Location',
+        value: CURRENT_LOCATION,
         location: {
           latitude: action.data[0],
           longitude: action.data[1],

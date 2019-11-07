@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+
+//for noticifation
+import * as Permissions from 'expo-permissions';
+import { Notifications } from 'expo';
+import Constants from 'expo-constants';
+
 import { googleAPI } from '../Constants/Apis';
 import credentials from '../credentials';
 import moment from 'moment';
@@ -22,8 +28,8 @@ export default function Home(props) {
   const fetchDirections = async () => {
     const response = await axios.get(directions.URL, {
       params: {
-        origin: '37.50588,127.059594',
-        destination: '37.650037,127.043383',
+        origin: `${screenProps.to.location.latitude},${screenProps.to.location.longitude}`,
+        destination: `${screenProps.from.location.latitude},${screenProps.from.location.longitude}`,
         mode: directions.MODE,
         transit_mode: directions.TRANSIT_MODE,
         arrival_time: `${tomorrow3AMUnitSeconds}`,
@@ -49,7 +55,6 @@ export default function Home(props) {
           },
         });
         if (response.status === 200) {
-          console.log('formatted_address', response.data.results[0].formatted_address);
           const formattedAddress = response.data.results[0].formatted_address;
           screenProps.setValueOfTo(formattedAddress);
         } else {
@@ -58,17 +63,58 @@ export default function Home(props) {
       } else if (name) {
       }
     };
-    fetchPlaceDetailsBy(
-      screenProps.to.value,
-      screenProps.to.location.latitude,
-      screenProps.to.location.longitude
-    );
+    if (screenProps.to.value !== 'Current Location') {
+      fetchPlaceDetailsBy(
+        screenProps.to.value,
+        screenProps.to.location.latitude,
+        screenProps.to.location.longitude
+      );
+    }
   }, [screenProps.to.value]);
+
+  ///////////////////
+  //notification
+
+  registerForPushNotificationsAsync = async () => {
+    if (Constants.isDevice) {
+      const { status: existingStatus } = await Permissions.getAsync(
+        Permissions.NOTIFICATIONS
+      );
+      let finalStatus = existingStatus;
+      if (existingStatus !== 'granted') {
+        const { status } = await Permissions.askAsync(
+          Permissions.NOTIFICATIONS
+        );
+        finalStatus = status;
+      }
+      if (finalStatus !== 'granted') {
+        alert('Failed to get push token for push notification!');
+        return;
+      }
+      let token = await Notifications.getExpoPushTokenAsync();
+      console.log('token:', token);
+    } else {
+      alert('Must use physical device for Push Notifications');
+    }
+  };
+
+  registerForPushNotificationsAsync();
+  Notifications.addListener(handleNotification);
+
+  function handleNotification() {
+    console.log('handleNotification on')
+    notification.data = 'ONONON';
+  }
+
+  const notification = {
+    data: 'hello',
+  };
 
   return (
     <>
       <View style={styles.container}>
         <Text>Home</Text>
+        <Text>{notification.data}</Text>
         <Button
           title="Set Alarm"
           onPress={() => {
@@ -83,6 +129,12 @@ export default function Home(props) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
