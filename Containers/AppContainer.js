@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import actionTypes from '../Constants/actionTypes';
 import AppNavigator from '../Navigators/AppNavigator';
 
-const { GOT_CURRENT_LOCATION, SET_VALUE_OF_TO, TYPED_FROM, CHANGED_MARKER_LOCATION } = actionTypes;
+const { GOT_CURRENT_LOCATION, SET_VALUE_OF_TO, TYPED_FROM, CHANGED_MARKER_LOCATION, GOT_DIRECTIONS } = actionTypes;
 const mapStateToProps = state => {
   return {
     from: state.from,
     to: state.to,
-    timers: state.timers
+    timers: state.timers,
+    isAlarmOn: state.isAlarmOn,
+    directions: state.directions
   };
 };
 
@@ -41,6 +43,12 @@ const mapDispatchToProps = dispatch => {
     },
     setTimer: (timer) => {
 
+    },
+    setDirections: (directions) => {
+      dispatch({
+        type:GOT_DIRECTIONS,
+        data: directions
+      })
     }
 
     // onToChange: (dispatch) => {
