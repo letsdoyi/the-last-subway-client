@@ -1,7 +1,7 @@
 import common from '../Constants/common';
 import actionTypes from '../Constants/actionTypes';
-const { CURRENT_LOCATION } = common;
 const { GOT_CURRENT_LOCATION, TYPED_FROM } = actionTypes;
+const { CURRENT_LOCATION } = common;
 const initialState = {
   value: '',
   location: {
