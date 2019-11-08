@@ -38,15 +38,16 @@ export default function MyMapContainer(props) {
     <View styles={styles.container}>
       {!!screenProps.from.location.longitude &&
         !!screenProps.from.location.latitude && (
-          <>
+          <View>
             <MapInputs
+              styles = {styles.mapInputs}
               screenProps={props.screenProps}
             />
             <MyMapView
               styles={styles.mapView}
               screenProps={props.screenProps}
             />
-          </>
+          </View>
         )}
       {(!screenProps.from.location.longitude ||
         !screenProps.from.location.latitude) && <Text>Loading</Text>}
@@ -56,19 +57,12 @@ export default function MyMapContainer(props) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-    position: 'relative',
+    position:'relative',
     backgroundColor: '#ddd',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  mapView: {
-    // position: 'absolute',
-    // top: 0,
-    // left: 0,
-    // marginTop: -100,
-    zIndex: -100,
+  mapInputs: {
+    width: '100%'
   }
 });

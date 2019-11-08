@@ -1,6 +1,13 @@
 import React, { Fragment } from 'react';
 import { GoogleAutoComplete } from 'react-native-google-autocomplete';
-import { TextInput, ScrollView, Button, Dimensions } from 'react-native';
+import {
+  StyleSheet,
+  TextInput,
+  ScrollView,
+  Button,
+  Dimensions,
+  View,
+} from 'react-native';
 import common from '../Constants/common';
 import LocationItem from './LocationItem';
 import credentials from '../credentials';
@@ -8,12 +15,29 @@ import credentials from '../credentials';
 const { CURRENT_LOCATION } = common;
 const { GOOGLE } = credentials;
 
+const styles = StyleSheet.create({
+  container: {
+    position: 'absolute',
+    top: 100,
+    left: '50%',
+    transform: [{ translateX: -Dimensions.get('window').width * 0.45 }],
+    width: '90%',
+  },
+  textInput: {
+    height: 35,
+    width: '100%',
+    paddingHorizontal: 16,
+    backgroundColor: '#fff',
+    margin: 3
+  },
+});
+
 export default function MapInput(props) {
   console.log('MapInput props:', props);
   const { screenProps } = props;
 
   return (
-    <>
+    <View style={styles.container}>
       <GoogleAutoComplete
         apiKey={GOOGLE.APIKEY}
         debounce={300}
@@ -24,12 +48,7 @@ export default function MapInput(props) {
           <Fragment>
             {console.log('inputValue', inputValue)}
             <TextInput
-              style={{
-                height: 40,
-                width: 300,
-                borderWidth: 1,
-                paddingHorizontal: 16,
-              }}
+              style={styles.textInput}
               value={inputValue}
               onChangeText={fromInputValue => {
                 screenProps.onFromInputChange(fromInputValue);
@@ -58,14 +77,8 @@ export default function MapInput(props) {
         components="country:ko">
         {({ inputValue, handleTextChange, locationResults, fetchDetails }) => (
           <Fragment>
-            {/* {console.log('locationResults', locationResults)} */}
             <TextInput
-              style={{
-                height: 40,
-                width: 300,
-                borderWidth: 1,
-                paddingHorizontal: 16,
-              }}
+              style={styles.textInput}
               value={screenProps.to.value || inputValue}
               onChangeText={handleTextChange}
               placeholder={'Where to?'}
@@ -82,6 +95,6 @@ export default function MapInput(props) {
           </Fragment>
         )}
       </GoogleAutoComplete>
-    </>
+    </View>
   );
 }

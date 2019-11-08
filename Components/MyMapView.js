@@ -7,6 +7,20 @@ export default function MyMapView(props) {
   const { screenProps } = props;
   const { Marker, PROVIDER_GOOGLE } = MapView;
 
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    mapStyle: {
+      width: '100%',
+      height: '100%',
+      zIndex: -1
+    },
+  });
+
   return (
     <MapView
       provider={PROVIDER_GOOGLE}
@@ -34,16 +48,3 @@ export default function MyMapView(props) {
     </MapView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  mapStyle: {
-    width: '100%',
-    height: '60%',
-  },
-});
