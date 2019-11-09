@@ -3,14 +3,25 @@ import { connect } from 'react-redux';
 import actionTypes from '../Constants/actionTypes';
 import AppNavigator from '../Navigators/AppNavigator';
 
-const { GOT_CURRENT_LOCATION, SET_VALUE_OF_TO, TYPED_FROM, CHANGED_MARKER_LOCATION, GOT_DIRECTIONS } = actionTypes;
+const {
+  GOT_CURRENT_LOCATION,
+  SET_VALUE_OF_TO,
+  TYPED_FROM,
+  CHANGED_MARKER_LOCATION,
+  GOT_DIRECTIONS,
+  SET_ALARM_TIMERS,
+  SAVED_ALARM_SETTING,
+  GOT_DEPARTURE_TIME_INFO
+} = actionTypes;
 const mapStateToProps = state => {
   return {
     from: state.from,
     to: state.to,
-    timers: state.timers,
+    alarmTimers: state.alarmTimers,
     isAlarmOn: state.isAlarmOn,
-    directions: state.directions
+    directions: state.directions,
+    isReadyToGetDirections: state.isReadyToGetDirections,
+    departureTimeInfo: state.departureTimeInfo,
   };
 };
 
@@ -34,22 +45,36 @@ const mapDispatchToProps = dispatch => {
         data: [Number(lat), Number(lon)],
       });
     },
-    setValueOfTo: (text) => {
+    setValueOfTo: text => {
       console.log('setValueOfTo ON');
       dispatch({
         type: SET_VALUE_OF_TO,
         data: text,
       });
     },
-    setTimer: (timer) => {
-
-    },
-    setDirections: (directions) => {
+    setDirections: directions => {
       dispatch({
-        type:GOT_DIRECTIONS,
-        data: directions
-      })
-    }
+        type: GOT_DIRECTIONS,
+        data: directions,
+      });
+    },
+    setAlarmTimers: alarmTimers => {
+      dispatch({
+        type: SET_ALARM_TIMERS,
+        data: alarmTimers,
+      });
+    },
+    saveAlarmSetting: () => {
+      dispatch({
+        type: SAVED_ALARM_SETTING,
+      });
+    },
+    setDepartureTimeInfo: info => {
+      dispatch({
+        type: GOT_DEPARTURE_TIME_INFO,
+        data: info,
+      });
+    },
 
     // onToChange: (dispatch) => {
 
