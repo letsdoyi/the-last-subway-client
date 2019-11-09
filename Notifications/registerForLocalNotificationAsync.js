@@ -3,13 +3,25 @@ import * as Permissions from 'expo-permissions';
 import noticifationConstants from '../Constants/notification';
 import { Notifications } from 'expo';
 import { Platform } from 'react-native';
-import { max } from 'moment';
+import { minuteToStringHourMinite, minuteToMiliseconds } from '../Utils/utils';
+import notification from '../Constants/notification';
 
-export default async function registerForLocalNotificationsAsync() {
+export default async function registerForLocalNotificationsAsync(
+  timerValueUnitMinute,
+  departureTimeValueUnitMilisecond
+) {
   console.log('registerForLocalNotificationsAsync ON');
-  console.log('noticifationConstants:', noticifationConstants);
-  const { CHANNEL_ID, PRIORITY, TITLE, BODY, DATA, VIBRATE, SOUND_ON, ICON_URL, LINK_URL, TIME } = noticifationConstants;
-  const localNotificationIdsQueue = [];
+  const {
+    CHANNEL_ID,
+    PRIORITY,
+    TITLE,
+    BODY,
+    DATA,
+    VIBRATE,
+    SOUND_ON,
+    ICON_URL,
+    LINK_URL,
+  } = noticifationConstants;
 
   const { status: existingStatus } = await Permissions.getAsync(
     Permissions.NOTIFICATIONS
@@ -39,24 +51,18 @@ export default async function registerForLocalNotificationsAsync() {
     });
   }
 
-  async function _createNotificationAsync() {
-    const notificationId = await Notifications.scheduleLocalNotificationAsync(
-      {
-        title: TITLE,
-        body: BODY,
-        data: DATA,
-        android: {
-          channelId: CHANNEL_ID,
-          sound: SOUND_ON,
-          icon: ICON_URL,
-          link: LINK_URL
-        },
-      },
-      {
-        time: TIME,
-      }
-    );
+  // Check if it is test mode or not
+  let isTestMode = false;
 
+  if (timerValueUnitMinute === '-1') {
+    isTestMode = true;
+  }
+
+  async function _createNotificationAsync(options) {
+    const notificationId = await Notifications.scheduleLocalNotificationAsync(
+      options.notification,
+      options.scheduling
+    );
     return notificationId;
     // localNotificationIdsQueue.push(notificationId);
     // localNotificationIdsQueue.forEach(id => {
@@ -64,5 +70,49 @@ export default async function registerForLocalNotificationsAsync() {
     // });
   }
 
-  return await _createNotificationAsync();
+  if (isTestMode) {
+    const optionsForTest = {
+      notification: {
+        title: TITLE,
+        body: `${BODY} [example] mins.`,
+        data: DATA,
+        android: {
+          channelId: CHANNEL_ID,
+          sound: SOUND_ON,
+          icon: ICON_URL,
+          link: LINK_URL,
+        },
+      },
+      scheduling: {
+        time: new Date().getTime() + 10000,
+      },
+    };
+    return await _createNotificationAsync(optionsForTest);
+  } else {
+    let hourMiniteString = minuteToStringHourMinite(timerValueUnitMinute);
+    if (hourMiniteString === '0') {
+      hourMiniteString = 'now';
+    }
+    const timerValueUnitMilisecond = minuteToMiliseconds(timerValueUnitMinute);
+    console.log('time');
+    console.log(typeof departureTimeValueUnitMilisecond)
+    console.log(typeof timerValueUnitMilisecond)
+    const optionsForProduct = {
+      notification: {
+        title: TITLE,
+        body: `${BODY} ${hourMiniteString}.`,
+        data: DATA,
+        android: {
+          channelId: CHANNEL_ID,
+          sound: SOUND_ON,
+          icon: ICON_URL,
+          link: LINK_URL,
+        },
+      },
+      scheduling: {
+        time: departureTimeValueUnitMilisecond + timerValueUnitMilisecond
+      },
+    };
+    return await _createNotificationAsync(optionsForProduct);
+  }
 }
