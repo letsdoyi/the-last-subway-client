@@ -11,14 +11,14 @@ export default function MyMapContainer(props) {
   useEffect(props => {
     async function getLocationAsync() {
       const { status } = await Permissions.askAsync(Permissions.LOCATION);
-      console.log('permission status:', status);
+      // console.log('permission status:', status);
       if (status === 'granted') {
         const location = await Location.getCurrentPositionAsync({
           enableHighAccuracy: true,
         });
-        console.log('current location:', location);
+        // console.log('current location:', location);
         const { latitude, longitude } = location.coords;
-        console.log('latitude:', latitude);
+        // console.log('latitude:', latitude);
         screenProps.setCurrentLocationToFrom(latitude, longitude);
         // console.log('after setCurrentLocation:', screenProps);
       } else {
@@ -28,12 +28,12 @@ export default function MyMapContainer(props) {
     getLocationAsync();
   }, {});
 
-  console.log('MyMapContainer props:', screenProps);
-  console.log(
-    'MyMapContainer props:',
-    screenProps.from.location.longitude,
-    screenProps.from.location.latitude
-  );
+  // console.log('MyMapContainer props:', screenProps);
+  // console.log(
+  //   'MyMapContainer props:',
+  //   screenProps.from.location.longitude,
+  //   screenProps.from.location.latitude
+  // );
   return (
     <View styles={styles.container}>
       {!!screenProps.from.location.longitude &&

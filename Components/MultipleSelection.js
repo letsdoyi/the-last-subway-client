@@ -4,36 +4,40 @@ import MultiSelect from 'react-native-multiple-select';
 
 const items = [
   {
+    id: '-1',
+    name: 'For testing',
+  },
+  {
     id: '0',
-    name: 'ON TIME',
+    name: 'On time',
   },
   {
-    id: '5m',
-    name: '5 MINS',
+    id: '5',
+    name: '5 min',
   },
   {
-    id: '10m',
-    name: '10 MINS',
+    id: '10',
+    name: '10 min',
   },
   {
-    id: '15m',
-    name: '15 MINS',
+    id: '15',
+    name: '15 min',
   },
   {
-    id: '30m',
-    name: '30 MINS',
+    id: '30',
+    name: '30 min',
   },
   {
-    id: '1h',
-    name: '1 HOUR',
+    id: '60',
+    name: '1 hour',
   },
   {
-    id: '1.5h',
-    name: '1.5 HOURS',
+    id: '90',
+    name: '1.5 hour',
   },
   {
-    id: '2h',
-    name: '2 HOURS',
+    id: '120',
+    name: '2 hour',
   },
 ];
 
@@ -53,21 +57,20 @@ export default class multiSelectWrapper extends Component {
     const { selectedItems } = this.state;
     const searchIcon = <View></View>;
     const { screenProps, navigation } = this.props;
-    // console.log('multiSelectWrapper:', this.props);
 
     return (
       <View style={styles.container}>
         <View style={styles.multiSelectContainer}>
           <MultiSelect
             autofocus={false}
-            style={{ backgroundColor: '#000' }}
+            style={{backgroundColor: '#fff', height: '50%'}}
             items={items}
             uniqueKey="id"
             hideDropdown={true}
             onSelectedItemsChange={this.onSelectedItemsChange}
             searchIcon={searchIcon}
             selectedItems={selectedItems}
-            selectText="PICK ALARM TIMES"
+            selectText="   PICK ALARM TIMES"
             searchInputPlaceholderText="Search Items..."
             tagRemoveIconColor="#CCC"
             tagBorderColor="#CCC"
@@ -89,7 +92,7 @@ export default class multiSelectWrapper extends Component {
             onPress={() => {
               if (selectedItems.length) {
                 screenProps.setAlarmTimers(selectedItems);
-                console.log('set AlarmTimers to store:', selectedItems);
+                screenProps.saveAlarmSetting();
                 this.setState({ isSelectedItemsDone: true });
                 alert('Success');
                 navigation.navigate('Home');
@@ -106,12 +109,12 @@ export default class multiSelectWrapper extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#ddd',
     justifyContent: 'center',
     alignItems: 'center',
   },
   multiSelectContainer: {
-    width: '80%',
+    width: '90%',
     height: 400,
   },
   button: {

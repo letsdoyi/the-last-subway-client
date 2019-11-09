@@ -3,7 +3,7 @@ import MapView from 'react-native-maps';
 import { StyleSheet, Text, View, Button, Dimensions } from 'react-native';
 
 export default function MyMapView(props) {
-  console.log('MyMapView props:', props);
+  // console.log('MyMapView props:', props);
   const { screenProps } = props;
   const { Marker, PROVIDER_GOOGLE } = MapView;
 
