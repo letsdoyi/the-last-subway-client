@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 });
 
 export default function MapInput(props) {
-  console.log('MapInput props:', props);
+  // console.log('MapInput props:', props);
   const { screenProps } = props;
 
   return (
