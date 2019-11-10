@@ -1,7 +1,8 @@
 import React from 'react';
 import Home from '../Components/Home';
 import SetAlarm from '../Components/SetAlarm';
-import Alarm from '../Components/Alarm';
+import AlarmTimer from '../Components/AlarmTimer';
+import SelectedLocations from '../Components/SelectedLocations';
 import MultipleSelection from '../Components/MultipleSelection';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -11,8 +12,10 @@ import { View, Text } from 'react-native';
 function navigationOptionss(title) {
   return {
     headerTitle: (
-      <View style={{ width: '100%'}}>
-        <Text style={{ color: '#000', fontSize: 18, textAlign: 'center' }}>{title}</Text>
+      <View style={{ width: '100%' }}>
+        <Text style={{ color: '#000', fontSize: 18, textAlign: 'center' }}>
+          {title}
+        </Text>
       </View>
     ),
     headerTransparent: true,
@@ -29,13 +32,17 @@ const AppNavigator = createStackNavigator(
       screen: SetAlarm,
       navigationOptions: navigationOptionss('Set Alarm'),
     },
-    Alarm: {
-      screen: Alarm,
-      navigationOptions: navigationOptionss('Alarm'),
+    AlarmTimer: {
+      screen: AlarmTimer,
+      navigationOptions: navigationOptionss('AlarmTimer'),
     },
     MultipleSelection: {
       screen: MultipleSelection,
       navigationOptions: navigationOptionss('AHEAD OF TIME ACTIVE'),
+    },
+    SelectedLocations: {
+      screen: SelectedLocations,
+      navigationOptions: navigationOptionss('SelectedLocations'),
     },
   },
   {
