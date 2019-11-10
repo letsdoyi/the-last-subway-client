@@ -34,7 +34,7 @@ export default function AlarmTimer(props) {
   const differentFromNow = secondsToStringHourMiniteSecond(
     parseInt(differentUnitMilisecond / 1000)
   );
-  if (differentFromNow === 0) {
+  if (differentFromNow === 0 || !screenProps.isAlarmOn) {
     timers.forEach(timer => {
       clearTimeout(timer);
     });
@@ -62,7 +62,7 @@ const screenRatio = (width * height) / 100;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    top: height * 0.12,
+    top: height * 0.08,
     height: '50%',
     flexDirection: 'column',
     borderWidth: 1,

@@ -23,7 +23,7 @@ let height = Dimensions.get('window').height;
 const styles = StyleSheet.create({
   container: {
     width: width,
-    top: height * 0.1,
+    top: height * 0.05,
     left: '50%',
     transform: [{ translateX: -Dimensions.get('window').width * 0.45 }],
     backgroundColor: '#fff',
