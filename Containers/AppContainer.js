@@ -13,7 +13,8 @@ const {
   SET_ALARM_TIMERS,
   SAVED_ALARM_SETTING,
   GOT_DEPARTURE_TIME_INFO,
-  SET_CURRENT_TIME
+  SET_CURRENT_TIME,
+  RESET_STATE
 } = actionTypes;
 const mapStateToProps = state => {
   return {
@@ -84,10 +85,12 @@ const mapDispatchToProps = dispatch => {
         data: timeUnitMilisecond,
       });
     },
-
-    // onToChange: (dispatch) => {
-
-    // }
+    resetState: () => {
+      console.log('resetState ON');
+      dispatch({
+        type: RESET_STATE,
+      });
+    }
   };
 };
 

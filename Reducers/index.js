@@ -1,18 +1,20 @@
 import { combineReducers } from 'redux';
-import loginReducer from '../Reducers/loginReducer';
 import fromReducer from './fromReducer';
 import toReducer from './toReducer';
 import alarmSwitchReducer from './alarmSwitchReducer';
 import directionsReducer from './directionsReducer';
 import alarmTimersReducer from './alarmTimersReducer';
 import directionsReadySwitchReducer from './directionsReadySwitchReducer';
+import departureTimeInfoReducer from './departureTimeInfoReducer';
+import currentTimeUnitMilisecondReducer from './currentTimeUnitMilisecondReducer';
 
 export default combineReducers({
-  // isLoggedIn: loginReducer,
   from: fromReducer,
   to: toReducer,
   alarmTimers: alarmTimersReducer,
   isAlarmOn: alarmSwitchReducer,
   directions: directionsReducer,
-  isReadyToGetDirections: directionsReadySwitchReducer
+  isReadyToGetDirections: directionsReadySwitchReducer,
+  departureTimeInfo: departureTimeInfoReducer,
+  currentTimeUnitMilisecond: currentTimeUnitMilisecondReducer
 });

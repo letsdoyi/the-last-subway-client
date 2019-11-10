@@ -1,6 +1,6 @@
 import common from '../Constants/common';
 import actionTypes from '../Constants/actionTypes';
-const { GOT_CURRENT_LOCATION, TYPED_FROM } = actionTypes;
+const { GOT_CURRENT_LOCATION, TYPED_FROM, RESET_STATE } = actionTypes;
 const { CURRENT_LOCATION } = common;
 const initialState = {
   value: '',
@@ -26,6 +26,9 @@ export function fromReducer(state = initialState, action) {
         value: action.data,
         ...state,
       };
+
+    case RESET_STATE:
+      return initialState;
 
     default:
       return state;

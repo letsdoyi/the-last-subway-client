@@ -6,6 +6,7 @@ const {
   GOT_CURRENT_LOCATION,
   SET_VALUE_OF_TO,
   CHANGED_MARKER_LOCATION,
+  RESET_STATE
 } = actionTypes;
 const initialState = {
   value: '',
@@ -41,11 +42,8 @@ export function toReducer(state = initialState, action) {
         value: action.data,
       };
 
-    // case TYPED_TO:
-    //   return {
-    //     value: action.data,
-    //     ...state,
-    //   };
+    case RESET_STATE:
+      return initialState;
 
     default:
       return state;

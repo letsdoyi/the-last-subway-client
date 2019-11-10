@@ -1,5 +1,5 @@
 import actionTypes from '../Constants/actionTypes';
-const { GOT_DEPARTURE_TIME_INFO } = actionTypes;
+const { GOT_DEPARTURE_TIME_INFO, RESET_STATE } = actionTypes;
 
 function departureTimeInfoReducer(state = {}, action) {
   console.log('departureTimeInfoReducer ON');
@@ -12,8 +12,12 @@ function departureTimeInfoReducer(state = {}, action) {
       return {
         text,
         timeZone,
-        valueUnitMilisecond
+        valueUnitMilisecond,
       };
+
+    case RESET_STATE:
+      return {};
+
     default:
       return state;
   }

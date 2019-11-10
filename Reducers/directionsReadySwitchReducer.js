@@ -1,7 +1,7 @@
 import common from '../Constants/common';
 import actionTypes from '../Constants/actionTypes';
 const { CURRENT_LOCATION } = common;
-const { SAVED_ALARM_SETTING, GOT_DIRECTIONS } = actionTypes;
+const { SAVED_ALARM_SETTING, GOT_DIRECTIONS, RESET_STATE } = actionTypes;
 
 function directionsReadySwitchReducer(state = false, action) {
   console.log('directionsReadySwitchReducer ON');
@@ -10,6 +10,9 @@ function directionsReadySwitchReducer(state = false, action) {
       return true;
 
     case GOT_DIRECTIONS:
+      return false;
+
+    case RESET_STATE:
       return false;
 
     default:
