@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Dimensions } from 'react-native';
+import SelectedLocations from './SelectedLocations';
+import AlarmTimer from './AlarmTimer';
 import axios from 'axios';
 
 //for noticifation
 import { Notifications } from 'expo';
 import registerForLocalNotificationAsync from '../Notifications/registerForLocalNotificationAsync';
-import registerForPushNotificationsAsync from '../Notifications/registerForPushNotificationsAsync';
+// import registerForPushNotificationsAsync from '../Notifications/registerForPushNotificationsAsync';
 
-import moment from 'moment';
 import { GOOGLE_API } from '../Constants/Apis';
 const { DIRECTIONS, GEOCODE } = GOOGLE_API;
 
@@ -29,7 +30,9 @@ export default function Home(props) {
     setDepartureTimeInfo,
     departureTimeInfo,
   } = screenProps;
-  console.log('alarmTimers from HOME:', alarmTimers.length);
+  // console.log('alarmTimers from HOME:', alarmTimers.length);
+  console.log('from, to in HOME:', from, to);
+
   //Whenever to.value is changed,
   useEffect(() => {
     if (to.value !== 'Current Location') {
@@ -116,10 +119,7 @@ export default function Home(props) {
       });
       if (isAlarmOn && isReadyToGetDirections) {
         const directionsApiResult = response.data;
-        console.log(
-          'directionsApiResult:',
-          directionsApiResult
-        );
+        console.log('directionsApiResult:', directionsApiResult);
         if (directionsApiResult.status === 'OK') {
           console.log(
             'status 확인:',
@@ -161,31 +161,52 @@ export default function Home(props) {
     });
   }
 
+  let contexts;
+  // if (!to.value || !from.value) {
+    if(0){
+    contexts = (
+      <View>
+        <Text>Set Alarm first</Text>
+        <Button
+          title="Set Alarm"
+          onPress={() => {
+            props.navigation.navigate('SetAlarm', {});
+          }}
+        />
+      </View>
+    );
+  } else {
+    contexts = (
+      <View>
+        <SelectedLocations style={styles.selectedLocations} screenProps={props.screenProps} />
+        <AlarmTimer style={styles.alarmTimers} screenProps={props.screenProps} />
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Home</Text>
-      <Text>Set Alarm first</Text>
-      <Button
-        title="Set Alarm"
-        onPress={() => {
-          props.navigation.navigate('SetAlarm', {});
-        }}
-      />
+      {contexts}
     </View>
   );
 }
-
+let width = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   container: {
+    width: width,
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
   },
-  container: {
+  selectedLocations: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: width,
   },
+  alarmTimers:{
+    flex: 2,
+    width: width,
+
+  }
+
 });
