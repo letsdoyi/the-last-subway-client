@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 export default function SelectedLocations(props) {
-  console.log('SelectedLocations props:', props);
+  // console.log('SelectedLocations props:', props);
   const { screenProps } = props;
   return (
     <View style={styles.container}>
@@ -23,7 +23,7 @@ let height = Dimensions.get('window').height;
 const styles = StyleSheet.create({
   container: {
     width: width,
-    top: height * 0.10,
+    top: height * 0.1,
     left: '50%',
     transform: [{ translateX: -Dimensions.get('window').width * 0.45 }],
     backgroundColor: '#fff',
@@ -33,6 +33,8 @@ const styles = StyleSheet.create({
     height: 35,
     backgroundColor: '#fff',
     borderWidth: 1,
-    margin: 3
+    margin: 3,
+    paddingLeft: 10,
+    lineHeight: 35,
   },
 });
