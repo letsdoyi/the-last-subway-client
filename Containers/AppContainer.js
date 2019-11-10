@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import actionTypes from '../Constants/actionTypes';
 import AppNavigator from '../Navigators/AppNavigator';
+import currentTimeUnitMilisecondReducer from '../Reducers/currentTimeUnitMilisecondReducer';
 
 const {
   GOT_CURRENT_LOCATION,
@@ -11,7 +12,8 @@ const {
   GOT_DIRECTIONS,
   SET_ALARM_TIMERS,
   SAVED_ALARM_SETTING,
-  GOT_DEPARTURE_TIME_INFO
+  GOT_DEPARTURE_TIME_INFO,
+  SET_CURRENT_TIME
 } = actionTypes;
 const mapStateToProps = state => {
   return {
@@ -22,6 +24,7 @@ const mapStateToProps = state => {
     directions: state.directions,
     isReadyToGetDirections: state.isReadyToGetDirections,
     departureTimeInfo: state.departureTimeInfo,
+    currentTimeUnitMilisecond: state.currentTimeUnitMilisecond
   };
 };
 
@@ -73,6 +76,12 @@ const mapDispatchToProps = dispatch => {
       dispatch({
         type: GOT_DEPARTURE_TIME_INFO,
         data: info,
+      });
+    },
+    setCurrentTime: timeUnitMilisecond => {
+      dispatch({
+        type: SET_CURRENT_TIME,
+        data: timeUnitMilisecond,
       });
     },
 
