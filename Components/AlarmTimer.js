@@ -1,23 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   StyleSheet,
   Text,
+  Image,
   View,
   Button,
   ScrollView,
   Switch,
   Dimensions,
+  TouchableHighlight,
 } from 'react-native';
 import {
   minuteToStringHourMinite,
   secondsToStringHourMiniteSecond,
 } from '../Utils/utils';
+import SetAlarm from './SetAlarm';
 
 export default function AlarmTimer(props) {
   // console.log('SetAlarm props:', props);
-  const { screenProps } = props;
+  // const { screenProps } = props;
   const { container, header, title, front } = styles;
-  const alarmTimers = screenProps.alarmTimers.map(timerValue => {
+  const alarmTimers = props.screenProps.alarmTimers.map(timerValue => {
     switch (timerValue) {
       case '-1':
         return '10 secs from now';
@@ -28,31 +31,59 @@ export default function AlarmTimer(props) {
     }
   });
   const timers = [];
-  const departuretime = screenProps.departureTimeInfo.valueUnitMilisecond;
-  const currentTime = screenProps.currentTimeUnitMilisecond;
+  // const textContainerStyleArr = [styles.textContainer];
+  const timersListArr = [styles.timersList];
+  const iconStyleArr = [styles.bellIcon];
+  const departuretime = props.screenProps.departureTimeInfo.valueUnitMilisecond;
+  const currentTime = props.screenProps.currentTimeUnitMilisecond;
   const differentUnitMilisecond = departuretime - currentTime;
-  const differentFromNow = secondsToStringHourMiniteSecond(
+  differentFromNow = secondsToStringHourMiniteSecond(
     parseInt(differentUnitMilisecond / 1000)
   );
-  if (differentFromNow === 0 || !screenProps.isAlarmOn) {
+  if (differentFromNow === 0 || !props.screenProps.isAlarmOn) {
     timers.forEach(timer => {
       clearTimeout(timer);
     });
+    // textContainerStyleArr.push(styles.opacity);
+    iconStyleArr.push(styles.opacity);
+    timersListArr.push(styles.opacity)
   }
-  const timer = setTimeout(
-    () => screenProps.setCurrentTime(parseInt(new Date().getTime())),
-    1000
-  );
-  timers.push(timer);
+  if (props.screenProps.isAlarmOn) {
+    const timer = setTimeout(
+      () => props.screenProps.setCurrentTime(parseInt(new Date().getTime())),
+      1000
+    );
+    timers.push(timer);
+  }
 
   return (
     <View style={styles.container}>
-      <Switch style={styles.switch} value={screenProps.isAlarmOn} />
-      <Text style={styles.title}>LEAVE AT</Text>
-      <Text style={styles.time}>{screenProps.departureTimeInfo.text}</Text>
-      <Text style={styles.hour}>{differentFromNow}</Text>
-      <Text style={styles.time}>Icon</Text>
-      <Text style={styles.timersList}>{alarmTimers.join(', ')}</Text>
+      <Switch
+        style={styles.switch}
+        value={props.screenProps.isAlarmOn}
+        onValueChange={() =>
+          props.screenProps.setIsAlarmOnTo(!props.screenProps.isAlarmOn)
+        }
+      />
+      <TouchableHighlight
+        style={styles.textContainer}
+        onPress={() => {
+          props.screenProps.setIsDirectionDetailsTo(true);
+        }}>
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <Text style={styles.title}>LEAVE AT</Text>
+          <Text style={styles.time}>
+            {props.screenProps.departureTimeInfo.text}
+          </Text>
+          <Text style={styles.hour}>{differentFromNow}</Text>
+          <Image
+            style={iconStyleArr}
+            source={require('../assets/bell.png')}
+            resizeMode={'cover'}
+          />
+          <Text style={timersListArr}>{alarmTimers.join(', ')}</Text>
+        </View>
+      </TouchableHighlight>
     </View>
   );
 }
@@ -67,8 +98,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     borderWidth: 1,
     paddingVertical: 50,
-    paddingHorizontal: 30,
+    paddingHorizontal: 10,
     backgroundColor: '#ddd',
+  },
+  textContainer: {
+    backgroundColor: '#aaa',
   },
   switch: {
     marginBottom: screenRatio * 0.01,
@@ -92,6 +126,14 @@ const styles = StyleSheet.create({
   timersList: {
     fontSize: height / 30,
     textAlign: 'center',
+    marginBottom: screenRatio * 0.005,
+  },
+  opacity: {
+    opacity: 0.3,
+  },
+  bellIcon:{
+    width: 30,
+    height: 30,
     marginBottom: screenRatio * 0.005,
   },
 });

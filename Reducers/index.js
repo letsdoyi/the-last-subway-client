@@ -7,6 +7,7 @@ import alarmTimersReducer from './alarmTimersReducer';
 import directionsReadySwitchReducer from './directionsReadySwitchReducer';
 import departureTimeInfoReducer from './departureTimeInfoReducer';
 import currentTimeUnitMilisecondReducer from './currentTimeUnitMilisecondReducer';
+import isDirectionDetailsOnReducer from './isDirectionDetailsOnReducer';
 
 export default combineReducers({
   from: fromReducer,
@@ -16,5 +17,6 @@ export default combineReducers({
   directions: directionsReducer,
   isReadyToGetDirections: directionsReadySwitchReducer,
   departureTimeInfo: departureTimeInfoReducer,
-  currentTimeUnitMilisecond: currentTimeUnitMilisecondReducer
+  currentTimeUnitMilisecond: currentTimeUnitMilisecondReducer,
+  isDirectionDetailsOn: isDirectionDetailsOnReducer,
 });
