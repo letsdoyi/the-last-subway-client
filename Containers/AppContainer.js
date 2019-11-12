@@ -14,8 +14,11 @@ const {
   SAVED_ALARM_SETTING,
   GOT_DEPARTURE_TIME_INFO,
   SET_CURRENT_TIME,
-  RESET_STATE
+  RESET_STATE,
+  EDIT_ALARM_SETTING,
+  SET_IS_DIRECTION_DETAILS_TO
 } = actionTypes;
+
 const mapStateToProps = state => {
   return {
     from: state.from,
@@ -25,7 +28,8 @@ const mapStateToProps = state => {
     directions: state.directions,
     isReadyToGetDirections: state.isReadyToGetDirections,
     departureTimeInfo: state.departureTimeInfo,
-    currentTimeUnitMilisecond: state.currentTimeUnitMilisecond
+    currentTimeUnitMilisecond: state.currentTimeUnitMilisecond,
+    isDirectionDetailsOn: state.isDirectionDetailsOn
   };
 };
 
@@ -89,6 +93,17 @@ const mapDispatchToProps = dispatch => {
       console.log('resetState ON');
       dispatch({
         type: RESET_STATE,
+      });
+    },
+    editAlarmSetting: () => {
+      dispatch({
+        type: EDIT_ALARM_SETTING
+      })
+    },
+    setIsDirectionDetailsTo: boolean => {
+      dispatch({
+        type: SET_IS_DIRECTION_DETAILS_TO,
+        data: boolean
       });
     }
   };
