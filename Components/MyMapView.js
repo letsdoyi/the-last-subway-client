@@ -8,7 +8,9 @@ import {
   Dimensions,
   Image,
 } from 'react-native';
+import { Icon } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons';
+import { initialState } from 'react-native-google-autocomplete';
 
 export default function MyMapView(props) {
   // console.log('MyMapView props:', props);
@@ -43,50 +45,56 @@ export default function MyMapView(props) {
       //android
       textShadowOffset: { width: 1, height: 2 },
     },
+    currentLocationIconWrapper: {
+      position: 'absolute',
+      bottom: '15%',
+      right: 10,
+    },
   });
+  const initialRegion = {
+    latitude: screenProps.to.location.latitude,
+    longitude: screenProps.to.location.longitude,
+    latitudeDelta: 0.045,
+    longitudeDelta: 0.045,
+  };
+  const backToCurrent = () => {
+    map.animateToRegion({
+      latitude: screenProps.from.location.latitude,
+      longitude: screenProps.from.location.longitude,
+      latitudeDelta: 0.045,
+      longitudeDelta: 0.045,
+    });
+  };
 
   return (
     <>
       <MapView
         provider={PROVIDER_GOOGLE}
         style={styles.mapStyle}
-        // region={this.getMapRegion()}
-        initialRegion={{
-          latitude: screenProps.to.location.latitude,
-          longitude: screenProps.to.location.longitude,
-          latitudeDelta: 0.01,
-          longitudeDelta: 0.0321,
-        }}
-        // region={{
-        //   latitude: screenProps.to.location.latitude,
-        //   longitude: screenProps.to.location.longitude,
-        //   latitudeDelta: 0.01,
-        //   longitudeDelta: 0.0321,
-        // }}
+        initialRegion={initialRegion}
         showsUserLocation={true}
+        showsCompass={true}
+        ref={map => {
+          this.map = map;
+        }}
         onRegionChangeComplete={region => {
           screenProps.onMarkerChange(region.latitude, region.longitude);
-        }}>
-        {/* <Marker
-        description="Destination"
-        // coordinate={this.getMapRegion()}
-        coordinate={{
-          latitude: screenProps.to.location.latitude,
-          longitude: screenProps.to.location.longitude,
-        }}
-        onDragEnd={e => {
-          const latitude = e.nativeEvent.coordinate.latitude;
-          const longitude = e.nativeEvent.coordinate.longitude;
-          console.log(e.nativeEvent);
-          screenProps.onMarkerChange(latitude, longitude);}}
-      ></Marker> */}
-      </MapView>
+        }}></MapView>
       <MaterialIcons
         style={styles.pinIcon}
         name="location-on"
         size={45}
         color="#000000"
       />
+      <View style={styles.currentLocationIconWrapper}>
+        <Icon
+          raised
+          name="my-location"
+          type="material"
+          color="black"
+          onPress={() => backToCurrent()}
+        />
+      </View>
     </>
   );
 }
