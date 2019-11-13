@@ -23,7 +23,7 @@ export default function AlarmTimer(props) {
   const alarmTimers = props.screenProps.alarmTimers.map(timerValue => {
     switch (timerValue) {
       case '-1':
-        return '10 secs from now';
+        return 'Now';
       case '0':
         return 'On time';
       default:
@@ -36,17 +36,17 @@ export default function AlarmTimer(props) {
   const iconStyleArr = [styles.bellIcon];
   const departuretime = props.screenProps.departureTimeInfo.valueUnitMilisecond;
   const currentTime = props.screenProps.currentTimeUnitMilisecond;
-  const differentUnitMilisecond = departuretime - currentTime;
-  differentFromNow = secondsToStringHourMiniteSecond(
-    parseInt(differentUnitMilisecond / 1000)
+  const differenceUnitMilisecond = departuretime - currentTime;
+  differenceFromNow = secondsToStringHourMiniteSecond(
+    parseInt(differenceUnitMilisecond / 1000)
   );
-  if (differentFromNow === 0 || !props.screenProps.isAlarmOn) {
+  if (Number(differenceFromNow) <= 0 || !props.screenProps.isAlarmOn) {
     timers.forEach(timer => {
       clearTimeout(timer);
     });
     // textContainerStyleArr.push(styles.opacity);
     iconStyleArr.push(styles.opacity);
-    timersListArr.push(styles.opacity)
+    timersListArr.push(styles.opacity);
   }
   if (props.screenProps.isAlarmOn) {
     const timer = setTimeout(
@@ -65,25 +65,28 @@ export default function AlarmTimer(props) {
           props.screenProps.setIsAlarmOnTo(!props.screenProps.isAlarmOn)
         }
       />
-      <TouchableHighlight
-        style={styles.textContainer}
-        onPress={() => {
-          props.screenProps.setIsDirectionDetailsTo(true);
-        }}>
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <Text style={styles.title}>LEAVE AT</Text>
-          <Text style={styles.time}>
-            {props.screenProps.departureTimeInfo.text}
-          </Text>
-          <Text style={styles.hour}>{differentFromNow}</Text>
-          <Image
-            style={iconStyleArr}
-            source={require('../assets/bell.png')}
-            resizeMode={'cover'}
-          />
-          <Text style={timersListArr}>{alarmTimers.join(', ')}</Text>
-        </View>
-      </TouchableHighlight>
+      <ScrollView scrollEnabled={true}>
+        <TouchableHighlight
+          style={styles.textContainer}
+          onPress={() => {
+            props.screenProps.setIsDirectionDetailsTo(true);
+          }}>
+          <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <Text style={styles.title}>LEAVE AT</Text>
+            <Text style={styles.time}>
+              {props.screenProps.departureTimeInfo.text}
+            </Text>
+            <Text style={styles.hour}>{differenceFromNow}</Text>
+            <Image
+              style={iconStyleArr}
+              source={require('../assets/bell.png')}
+              resizeMode={'cover'}
+            />
+            <Text style={timersListArr}>{alarmTimers.join(' | ')}</Text>
+          </View>
+        </TouchableHighlight>
+        <Text style={styles.blank}></Text>
+      </ScrollView>
     </View>
   );
 }
@@ -124,6 +127,7 @@ const styles = StyleSheet.create({
     marginBottom: screenRatio * 0.005,
   },
   timersList: {
+    width: width * 0.9,
     fontSize: height / 30,
     textAlign: 'center',
     marginBottom: screenRatio * 0.005,
@@ -131,9 +135,13 @@ const styles = StyleSheet.create({
   opacity: {
     opacity: 0.3,
   },
-  bellIcon:{
+  bellIcon: {
     width: 30,
     height: 30,
     marginBottom: screenRatio * 0.005,
+  },
+  blank: {
+    paddingVertical: 30,
+    paddingHorizontal: 10,
   },
 });
