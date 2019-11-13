@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Dimensions} from 'react-native';
+import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import { Button } from 'react-native-elements';
 
 import MultiSelect from 'react-native-multiple-select';
@@ -7,7 +7,7 @@ import MultiSelect from 'react-native-multiple-select';
 const items = [
   {
     id: '-1',
-    name: 'For testing',
+    name: 'Now (For testing)',
   },
   {
     id: '0',
@@ -62,34 +62,45 @@ export default class multiSelectWrapper extends Component {
 
     return (
       <View style={styles.container}>
+        <View><Text style={styles.title}>AHEAD OF TIME ACTIVE</Text></View>
         <View style={styles.multiSelectContainer}>
           <MultiSelect
             autofocus={false}
-            style={{ backgroundColor: '#fff', height: '50%' }}
+            styleInputGroup={{ backgroundColor: '#000'}}
+            styleDropdownMenuSubsection={{ backgroundColor: '#000', borderWidth: 0}}
+            styleTextDropdownSelected={{color: '#FF9D0A'}}
+            styleDropdownMenu={{backgroundColor: '#000'}}
+            styleTextDropdown={{color: '#FF9D0A', fontWeight:'700'}}
+            styleItemsContainer={{ backgroundColor: '#000'}}
+            styleRowList={{marginBottom: 3}}
             items={items}
             uniqueKey="id"
             hideDropdown={true}
             onSelectedItemsChange={this.onSelectedItemsChange}
             searchIcon={searchIcon}
             selectedItems={selectedItems}
-            selectText="   PICK ALARM TIMES"
+            selectText="      ALARM TIMES"
             searchInputPlaceholderText="Search Items..."
-            tagRemoveIconColor="#CCC"
-            tagBorderColor="#CCC"
-            tagTextColor="#CCC"
-            selectedItemTextColor="#CCC"
-            selectedItemIconColor="#CCC"
-            itemTextColor="#000"
+            tagRemoveIconColor="#FF9D0A"
+            tagBorderColor="#FF9D0A"
+            tagTextColor="#FF9D0A"
+            selectedItemTextColor="#FF9D0A"
+            selectedItemIconColor="#FF9D0A"
+            itemTextColor="#fff"
+            itemFontSize= {20}
             displayKey="name"
-            searchInputStyle={{ color: '#CCC', height: 0 }}
-            submitButtonColor="#CCC"
-            submitButtonText="Submit"
+            searchInputPlaceholderText=''
+            fontSize={20}
+            textInputProps={{editable: false}}
+            hideSubmitButton={true}
             // hideTags={true}
           />
         </View>
         <View style={styles.button}>
           <Button
-            buttonStyle={{ backgroundColor: 'black' }}
+            buttonStyle={{
+              backgroundColor: 'rgba(99,99,102,.5)',
+            }}
             titleStyle={{ fontWeight: '500' }}
             title="DONE"
             onPress={() => {
@@ -112,9 +123,16 @@ export default class multiSelectWrapper extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ddd',
-    justifyContent: 'center',
+    backgroundColor: '#000',
+    top: 100,
     alignItems: 'center',
+  },
+  title: {
+    color: '#fff',
+    paddingHorizontal: 10,
+    paddingVertical: 50,
+    fontWeight: "900",
+    fontSize: 25
   },
   multiSelectContainer: {
     width: '90%',
