@@ -4,10 +4,11 @@ import {
   StyleSheet,
   TextInput,
   ScrollView,
-  Button,
   Dimensions,
   View,
 } from 'react-native';
+import { Entypo,
+  MaterialCommunityIcons } from '@expo/vector-icons';
 import common from '../Constants/common';
 import LocationItem from './LocationItem';
 import credentials from '../credentials';
@@ -23,12 +24,24 @@ const styles = StyleSheet.create({
     transform: [{ translateX: -Dimensions.get('window').width * 0.45 }],
     width: '90%',
   },
-  textInput: {
-    height: 35,
-    width: '100%',
-    paddingHorizontal: 16,
+  inputIconSetWrapper: {
+    flexDirection: 'row',
     backgroundColor: '#fff',
-    margin: 3
+  },
+  textInput: {
+    width: '90%',
+    height: 35,
+    margin: 3,
+  },
+  backgroudColorLightGray: {
+    backgroundColor: 'rgba(240,240,240,0.9)',
+  },
+  backgroudColorDarkGray: {
+    backgroundColor: 'rgba(222,222,227,1)',
+  },
+  fromIcon: {
+    width: '10%',
+    height: 35,
   },
 });
 
@@ -47,15 +60,24 @@ export default function MapInput(props) {
         {({ inputValue, handleTextChange, locationResults, fetchDetails }) => (
           <Fragment>
             {console.log('inputValue', inputValue)}
-            <TextInput
-              style={styles.textInput}
-              value={inputValue}
-              onChangeText={fromInputValue => {
-                screenProps.onFromInputChange(fromInputValue);
-                handleTextChange(fromInputValue);
-              }}
-              placeholder={CURRENT_LOCATION}
-            />
+            <View style={[styles.inputIconSetWrapper, styles.backgroudColorLightGray]}>
+              <Entypo
+                style={styles.fromIcon}
+                name="dot-single"
+                size={38}
+                color={'black'}
+              />
+              <TextInput
+                style={[styles.textInput]}
+                value={inputValue}
+                onChangeText={fromInputValue => {
+                  screenProps.onFromInputChange(fromInputValue);
+                  handleTextChange(fromInputValue);
+                }}
+                placeholder={CURRENT_LOCATION}
+                placeholderTextColor={'#0a84ff'}
+              />
+            </View>
             <ScrollView style={{ maxHeight: 100 }}>
               {locationResults.map((el, i) => (
                 <LocationItem
@@ -77,12 +99,21 @@ export default function MapInput(props) {
         components="country:ko">
         {({ inputValue, handleTextChange, locationResults, fetchDetails }) => (
           <Fragment>
-            <TextInput
-              style={styles.textInput}
-              value={screenProps.to.value || inputValue}
-              onChangeText={handleTextChange}
-              placeholder={'Where to?'}
-            />
+            <View style={[styles.inputIconSetWrapper, styles.backgroudColorDarkGray]}>
+              <MaterialCommunityIcons
+                style={styles.fromIcon}
+                name="square-medium-outline"
+                size={38}
+                color={'black'}
+              />
+              <TextInput
+                style={styles.textInput}
+                value={screenProps.to.value || inputValue}
+                onChangeText={handleTextChange}
+                placeholder={'Where to?'}
+                placeholderTextColor={'black'}
+              />
+            </View>
             <ScrollView style={{ maxHeight: 100 }}>
               {locationResults.map((el, i) => (
                 <LocationItem
