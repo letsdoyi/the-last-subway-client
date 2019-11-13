@@ -15,9 +15,10 @@ import {
   secondsToStringHourMiniteSecond,
 } from '../Utils/utils';
 import Steps from './Steps';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function AlarmTimer(props) {
-  console.log('SetAlarm props:', props);
+  console.log('SetLocation props:', props);
   // const { screenProps } = props;
   const { container, header, title, front } = styles;
   const alarmTimers = props.screenProps.alarmTimers.map(timerValue => {
@@ -278,12 +279,10 @@ export default function AlarmTimer(props) {
   // const context = directions.legs[0].steps.map(step => {
   const context = props.screenProps.directions.legs.map(leg => {
     return leg.steps.map(step => {
-      step.html_instructions = step.html_instructions.replace('대한민국', '');
+      step.html_instructions = step.html_instructions.replace('대한민국 ', '');
       if (step.travel_mode === 'WALKING') {
         stepsSummaryArr.push({
           travel_mode: step.travel_mode,
-          image:
-            'https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_directions_walk_48px-512.png',
           duration: { text: step.duration.text, value: step.duration.value },
         });
         return (
@@ -312,7 +311,6 @@ export default function AlarmTimer(props) {
       } else {
         stepsSummaryArr.push({
           travel_mode: step.travel_mode,
-          image: `http:${step.transit_details.line.vehicle.icon}`,
           duration: { text: step.duration.text, value: step.duration.value },
           lineColor: step.transit_details.line.color,
           lineText: step.transit_details.line.short_name,
@@ -322,8 +320,8 @@ export default function AlarmTimer(props) {
             <View style={styles.leftSection}>
               <Image
                 style={{
-                  width: 20,
-                  height: 20,
+                  width: 15,
+                  height: 15,
                 }}
                 source={{
                   uri: `http:${step.transit_details.line.vehicle.icon}`,
@@ -357,9 +355,6 @@ export default function AlarmTimer(props) {
                 {step.transit_details.departure_stop.name},{' '}
                 {step.transit_details.departure_time.text}
               </Text>
-              {/* <Text style={[styles.contextBody]}>
-                {step.transit_details.departure_time.text}
-              </Text> */}
               <Text style={[styles.stops]}>
                 {' '}
                 > Ride {step.transit_details.num_stops} stops (
@@ -375,7 +370,6 @@ export default function AlarmTimer(props) {
       }
     });
   });
-  // console.log('stepsSummaryArr', stepsSummaryArr);
   const totalDurationValue =
     props.screenProps.directions.legs[0].duration.value;
   const lineGraphHeight = 15;
@@ -448,13 +442,10 @@ export default function AlarmTimer(props) {
           props.screenProps.setIsDirectionDetailsTo(false);
         }}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Image
-            style={{
-              width: 30,
-              height: 30,
-            }}
-            source={require('../assets/baseline_arrow_back_ios_black_18dp.png')}
-            resizeMode={'cover'}
+          <Ionicons
+            name="ios-arrow-back"
+            size={30}
+            color="#000000"
           />
           <Text style={styles.backText}>Back</Text>
         </View>
@@ -478,9 +469,12 @@ export default function AlarmTimer(props) {
             }}>
             {stepsSummaryArr}
           </View>
-          <Text style={{
+          <Text
+            style={{
               fontSize: 10,
-            }}>심야버스의 소요시간은 정확하지 않을 수 있습니다.</Text>
+            }}>
+            심야버스의 소요시간은 정확하지 않을 수 있습니다.
+          </Text>
         </View>
         {context}
         <Text style={styles.blank}></Text>
@@ -505,7 +499,6 @@ const styles = StyleSheet.create({
     height: screenRatio * 0.015,
     backgroundColor: '#aaaaaa',
     justifyContent: 'center',
-    // marginBottom: screenRatio * 0.01,
   },
   timesContainer: {
     flexDirection: 'column',
@@ -584,6 +577,7 @@ const styles = StyleSheet.create({
   },
   backText: {
     fontSize: 18,
+    paddingLeft: 10,
     justifyContent: 'center',
   },
 });

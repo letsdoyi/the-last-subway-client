@@ -1,33 +1,19 @@
 import React from 'react';
 import MyMapContainer from './MyMapContainer';
 import MultipleSelection from './MultipleSelection';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  ScrollView,
-  Dimensions,
-} from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
-import { relativeTimeRounding } from 'moment';
+import { StyleSheet, Text, View, ScrollView, Dimensions } from 'react-native';
+import { Button } from 'react-native-elements';
 
-export default function SetAlarm(props) {
-  // console.log('SetAlarm props:', props);
+export default function SetLocation(props) {
+  // console.log('SetLocation props:', props);
   const { container, header, title, containerWrapper } = styles;
   return (
     <View style={containerWrapper}>
-      <View style={[header]}>
-        <Text>Cancel</Text>
-        <Text style={title}>Set Alarm</Text>
-        <Text onPress={() => {}}>Save</Text>
-      </View>
-
       <MyMapContainer style={{}} screenProps={props.screenProps} />
-
       <View style={styles.buttonTomultipleSelection}>
         <Button
-          style={{}}
+          buttonStyle={{ backgroundColor: 'black' }}
+          titleStyle={{ fontWeight: '500' }}
           title="DONE"
           onPress={() => {
             props.navigation.navigate('MultipleSelection');
@@ -61,9 +47,9 @@ const styles = StyleSheet.create({
   buttonTomultipleSelection: {
     position: 'absolute',
     left: '50%',
-    bottom: '20%',
+    bottom: '5%',
     transform: [{ translateX: -Dimensions.get('window').width * 0.45 }],
     width: '90%',
-    backgroundColor: '#000',
+    color: '#fff',
   },
 });

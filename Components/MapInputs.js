@@ -18,7 +18,7 @@ const { GOOGLE } = credentials;
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    top: 100,
+    top: Dimensions.get('window').width * 0.2,
     left: '50%',
     transform: [{ translateX: -Dimensions.get('window').width * 0.45 }],
     width: '90%',

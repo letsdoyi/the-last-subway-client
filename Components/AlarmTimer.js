@@ -14,10 +14,11 @@ import {
   minuteToStringHourMinite,
   secondsToStringHourMiniteSecond,
 } from '../Utils/utils';
-import SetAlarm from './SetAlarm';
+import SetLocation from './SetLocation';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function AlarmTimer(props) {
-  // console.log('SetAlarm props:', props);
+  // console.log('SetLocation props:', props);
   // const { screenProps } = props;
   const { container, header, title, front } = styles;
   const alarmTimers = props.screenProps.alarmTimers.map(timerValue => {
@@ -77,10 +78,11 @@ export default function AlarmTimer(props) {
               {props.screenProps.departureTimeInfo.text}
             </Text>
             <Text style={styles.hour}>{differenceFromNow}</Text>
-            <Image
+            <MaterialCommunityIcons
               style={iconStyleArr}
-              source={require('../assets/bell.png')}
-              resizeMode={'cover'}
+              name="bell"
+              size={30}
+              color="#000000"
             />
             <Text style={timersListArr}>{alarmTimers.join(' | ')}</Text>
           </View>

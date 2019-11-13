@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Dimensions, Button } from 'react-native';
+import { StyleSheet, View, Dimensions} from 'react-native';
+import { Button } from 'react-native-elements';
+
 import MultiSelect from 'react-native-multiple-select';
 
 const items = [
@@ -63,7 +65,7 @@ export default class multiSelectWrapper extends Component {
         <View style={styles.multiSelectContainer}>
           <MultiSelect
             autofocus={false}
-            style={{backgroundColor: '#fff', height: '50%'}}
+            style={{ backgroundColor: '#fff', height: '50%' }}
             items={items}
             uniqueKey="id"
             hideDropdown={true}
@@ -87,7 +89,8 @@ export default class multiSelectWrapper extends Component {
         </View>
         <View style={styles.button}>
           <Button
-            style={{}}
+            buttonStyle={{ backgroundColor: 'black' }}
+            titleStyle={{ fontWeight: '500' }}
             title="DONE"
             onPress={() => {
               if (selectedItems.length) {

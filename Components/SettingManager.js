@@ -31,7 +31,7 @@ export default function SettingManager(props) {
           // console.log(props.nav);
           // console.log(props);
           // props.screenProps.editAlarmSetting();
-          props.navigation.navigate('SetAlarm', {});
+          props.navigation.navigate('SetLocation', {});
         }}
         style={[styles.elementWrapper, { paddingLeft: 50 }]}>
         <Text style={styles.element}>EDIT</Text>

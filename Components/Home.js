@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, Button, Dimensions } from 'react-native';
+import SettingManager from './SettingManager';
 import SelectedLocations from './SelectedLocations';
 import AlarmTimer from './AlarmTimer';
+import DirectionDetails from './DirectionDetails';
 import axios from 'axios';
 
 //for noticifation
@@ -17,7 +19,7 @@ const { GOOGLE } = credentials;
 
 export default function Home(props) {
   // console.info('HOME props:', props);
-  const { screenProps } = props;
+  const { screenProps, navigation } = props;
   const {
     to,
     setValueOfTo,
@@ -30,8 +32,6 @@ export default function Home(props) {
     setDepartureTimeInfo,
     departureTimeInfo,
   } = screenProps;
-  // console.log('alarmTimers from HOME:', alarmTimers.length);
-  console.log('from, to in HOME:', from, to);
 
   //Whenever to.value is changed,
   useEffect(() => {
@@ -48,10 +48,10 @@ export default function Home(props) {
       latitude = null,
       longitude = null
     ) {
-      console.log('fetchPlaceDetailsBy ON');
-      console.log('latitude,longitude', latitude, longitude);
+      // console.log('fetchPlaceDetailsBy ON');
+      // console.log('latitude,longitude', latitude, longitude);
       if (latitude && longitude) {
-        console.log('GEOCODE_API ON');
+        // console.log('GEOCODE_API ON');
         const response = await axios.get(GEOCODE.URL, {
           params: {
             latlng: `${latitude},${longitude}`,
@@ -71,19 +71,19 @@ export default function Home(props) {
     }
   }, [to.value]);
 
-  console.log('isAlarmOn', isAlarmOn);
-  console.log('isReadyToGetDirections:', isReadyToGetDirections);
+  // console.log('isAlarmOn', isAlarmOn);
+  // console.log('isReadyToGetDirections:', isReadyToGetDirections);
 
   useEffect(() => {
     const selectedTimers = alarmTimers;
     fetchDirectionsAsync();
-    console.log('departureTimeInfo:', departureTimeInfo);
+    // console.log('departureTimeInfo:', departureTimeInfo);
     if (Object.values(departureTimeInfo).length === 0) {
-      console.log('no departureTimeInfo');
+      // console.log('no departureTimeInfo');
     } else {
       selectedTimers.forEach(timerValueUnitMinute => {
-        console.log('selectedTimers:', timerValueUnitMinute);
-        console.log('잘나오나', departureTimeInfo.valueUnitMilisecond);
+        // console.log('selectedTimers:', timerValueUnitMinute);
+        // console.log('잘나오나', departureTimeInfo.valueUnitMilisecond);
         triggerLocalNotificationFunction(
           timerValueUnitMinute,
           departureTimeInfo.valueUnitMilisecond
@@ -92,28 +92,24 @@ export default function Home(props) {
     }
 
     async function fetchDirectionsAsync() {
-      // const localTimeOfTomarrow = moment()
-      //   .add(1, 'days')
-      //   .format('YYYY-MM-DD');
-      // const tomorrow3AMUnitSecond =
-      //   new Date(`${localTimeOfTomarrow}T03:00:00`).getTime() / 1000;
-      // console.log('localTimeOfTomarrow:', new Date(tomorrow3AMUnitSecond * 1000));
       const milisecondsOfoneDay = 1000 * 60 * 60 * 24;
-      const tomorrow3amUnitsecond =
-        (new Date().setHours(3, 0, 0, 0) + milisecondsOfoneDay) / 1000;
-      console.log(
-        'tomorrow3am vscode에서는 왜 다르게 나오는지 질문하기:',
-        new Date(tomorrow3amUnitsecond * 1000)
-      );
+      const tomorrow2amUnitsecond =
+        (new Date().setHours(2, 0, 0, 0) + milisecondsOfoneDay) / 1000;
+      // console.log(
+      //   'tomorrow2am vscode에서는 왜 다르게 나오는지 질문하기:',
+      //   new Date(tomorrow3amUnitsecond * 1000)
+      // );
 
+      const { MODE, TRANSIT_MODE, TRANSIT_ROUTING_PREFERENCE, LANGUAGE } = DIRECTIONS;
       const response = await axios.get(DIRECTIONS.URL, {
         params: {
-          origin: `${to.location.latitude},${to.location.longitude}`,
-          destination: `${from.location.latitude},${from.location.longitude}`,
-          mode: DIRECTIONS.MODE,
-          transit_mode: DIRECTIONS.TRANSIT_MODE,
-          arrival_time: `${tomorrow3amUnitsecond}`,
-          language: DIRECTIONS.LANGUAGE,
+          origin: `${from.location.latitude},${from.location.longitude}`,
+          destination: `${to.location.latitude},${to.location.longitude}`,
+          mode: MODE.TRANSIT,
+          transit_mode: TRANSIT_MODE.SUBWAY,
+          transit_routing_preference: TRANSIT_ROUTING_PREFERENCE.FEWER_TRANSFERS,
+          arrival_time: `${tomorrow2amUnitsecond}`,
+          language: LANGUAGE.KO,
           key: GOOGLE.APIKEY,
         },
       });
@@ -121,17 +117,17 @@ export default function Home(props) {
         const directionsApiResult = response.data;
         console.log('directionsApiResult:', directionsApiResult);
         if (directionsApiResult.status === 'OK') {
-          console.log(
-            'status 확인:',
-            directionsApiResult.routes[0].legs[0].departure_time
-          );
+          // console.log(
+          //   'status 확인:',
+          //   directionsApiResult.routes[0].legs[0].departure_time
+          // );
           setDepartureTimeInfo(
             directionsApiResult.routes[0].legs[0].departure_time
           );
           setDirections(directionsApiResult.routes[0]);
         } else {
-          console.log('Cannot get Any directions info');
-          alart('Cannot get Any directions info, Try again!');
+          // console.log('Cannot get Any directions info');
+          alert('Cannot get Any directions info, Try again!');
         }
       }
     }
@@ -162,33 +158,59 @@ export default function Home(props) {
   }
 
   let contexts;
-  // if (!to.value || !from.value) {
-    if(0){
+  if (!to.value || !from.value || !departureTimeInfo.text) {
+    // if(0){
     contexts = (
       <View>
         <Text>Set Alarm first</Text>
         <Button
           title="Set Alarm"
           onPress={() => {
-            props.navigation.navigate('SetAlarm', {});
+            props.navigation.navigate('SetLocation', {});
           }}
+        />
+      </View>
+    );
+  } else if (!props.screenProps.isDirectionDetailsOn) {
+    contexts = (
+      <View>
+        <SettingManager
+          style={styles.settingManager}
+          navigation={navigation}
+          screenProps={screenProps}
+        />
+        <SelectedLocations
+          style={styles.selectedLocations}
+          screenProps={screenProps}
+        />
+        <AlarmTimer
+          style={styles.alarmTimers}
+          navigation={navigation}
+          screenProps={screenProps}
         />
       </View>
     );
   } else {
     contexts = (
       <View>
-        <SelectedLocations style={styles.selectedLocations} screenProps={props.screenProps} />
-        <AlarmTimer style={styles.alarmTimers} screenProps={props.screenProps} />
+        <SettingManager
+          style={styles.settingManager}
+          navigation={navigation}
+          screenProps={screenProps}
+        />
+        <SelectedLocations
+          style={styles.selectedLocations}
+          screenProps={screenProps}
+        />
+        <DirectionDetails
+          style={styles.alarmTimers}
+          navigation={navigation}
+          screenProps={screenProps}
+        />
       </View>
     );
   }
-
-  return (
-    <View style={styles.container}>
-      {contexts}
-    </View>
-  );
+  return <View style={styles.container}>{contexts}</View>;
 }
 let width = Dimensions.get('window').width;
 const styles = StyleSheet.create({
@@ -199,14 +221,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  settingManager: {
+    flex: 1,
+    width: width,
+  },
   selectedLocations: {
     flex: 1,
     width: width,
   },
-  alarmTimers:{
+  alarmTimers: {
     flex: 2,
     width: width,
-
-  }
-
+  },
 });

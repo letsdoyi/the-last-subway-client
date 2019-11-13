@@ -7,7 +7,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import combinedReducer from './Reducers';
 import Home from './Components/Home';
-import SetAlarm from './Components/SetAlarm';
+import SetLocation from './Components/SetLocation';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
@@ -32,7 +32,7 @@ export default class App extends Component {
 // const AppNavigator = createStackNavigator(
 //   {
 //     Home: Home,
-//     SetAlarm: SetAlarm,
+//     SetLocation: SetLocation,
 //   },
 //   {
 //     initialRouteName: 'Home',

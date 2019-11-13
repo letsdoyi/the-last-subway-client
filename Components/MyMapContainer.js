@@ -29,11 +29,11 @@ export default function MyMapContainer(props) {
   }, {});
 
   // console.log('MyMapContainer props:', screenProps);
-  console.log(
-    'MyMapContainer props:',
-    screenProps.from.location.longitude,
-    screenProps.from.location.latitude
-  );
+  // console.log(
+  //   'MyMapContainer props:',
+  //   screenProps.from.location.longitude,
+  //   screenProps.from.location.latitude
+  // );
   return (
     <View styles={styles.container}>
       {!!screenProps.from.location.longitude &&
