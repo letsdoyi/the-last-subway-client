@@ -29,7 +29,7 @@ export function toReducer(state = initialState, action) {
 
     case CHANGED_MARKER_LOCATION:
       return {
-        value: '',
+        ...state,
         location: {
           latitude: action.data[0],
           longitude: action.data[1],
