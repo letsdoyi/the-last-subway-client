@@ -32,12 +32,13 @@ const styles = StyleSheet.create({
     width: '90%',
     height: 35,
     margin: 3,
+    color: '#ff9d0a'
   },
   backgroudColorLightGray: {
-    backgroundColor: 'rgba(240,240,240,0.9)',
+    backgroundColor: 'rgba(0,0,0,.7)',
   },
   backgroudColorDarkGray: {
-    backgroundColor: 'rgba(222,222,227,1)',
+    backgroundColor: 'rgba(0,0,0,.8)',
   },
   fromIcon: {
     width: '10%',
@@ -65,7 +66,7 @@ export default function MapInput(props) {
                 style={styles.fromIcon}
                 name="dot-single"
                 size={38}
-                color={'black'}
+                color={'#0a84ff'}
               />
               <TextInput
                 style={[styles.textInput]}
@@ -104,14 +105,14 @@ export default function MapInput(props) {
                 style={styles.fromIcon}
                 name="square-medium-outline"
                 size={38}
-                color={'black'}
+                color={'#000'}
               />
               <TextInput
                 style={styles.textInput}
                 value={screenProps.to.value || inputValue}
                 onChangeText={handleTextChange}
                 placeholder={'Where to?'}
-                placeholderTextColor={'black'}
+                placeholderTextColor={'#ff9d0a'}
               />
             </View>
             <ScrollView style={{ maxHeight: 100 }}>

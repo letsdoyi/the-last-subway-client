@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import SettingManager from './SettingManager';
 import SelectedLocations from './SelectedLocations';
 import AlarmTimer from './AlarmTimer';
 import DirectionDetails from './DirectionDetails';
+import { Button } from 'react-native-elements';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import axios from 'axios';
 
 //for noticifation
@@ -51,7 +53,6 @@ export default function Home(props) {
       // console.log('fetchPlaceDetailsBy ON');
       // console.log('latitude,longitude', latitude, longitude);
       if (latitude && longitude) {
-        // console.log('GEOCODE_API ON');
         const response = await axios.get(GEOCODE.URL, {
           params: {
             latlng: `${latitude},${longitude}`,
@@ -59,17 +60,20 @@ export default function Home(props) {
             key: GOOGLE.APIKEY,
           },
         });
+        console.log('response:', response);
         if (response.status === 200) {
           const formattedAddress = response.data.results[0].formatted_address;
           setValueOfTo(formattedAddress);
+        } else if (response.status === 500) {
+          setValueOfTo('Please choose another location');
         } else {
-          setValueOfTo('loading');
+          setValueOfTo('Loading...');
         }
       } else if (value) {
         //location Search by name
       }
     }
-  }, [to.value]);
+  }, [to.location.longitude]);
 
   // console.log('isAlarmOn', isAlarmOn);
   // console.log('isReadyToGetDirections:', isReadyToGetDirections);
@@ -100,14 +104,20 @@ export default function Home(props) {
       //   new Date(tomorrow3amUnitsecond * 1000)
       // );
 
-      const { MODE, TRANSIT_MODE, TRANSIT_ROUTING_PREFERENCE, LANGUAGE } = DIRECTIONS;
+      const {
+        MODE,
+        TRANSIT_MODE,
+        TRANSIT_ROUTING_PREFERENCE,
+        LANGUAGE,
+      } = DIRECTIONS;
       const response = await axios.get(DIRECTIONS.URL, {
         params: {
           origin: `${from.location.latitude},${from.location.longitude}`,
           destination: `${to.location.latitude},${to.location.longitude}`,
           mode: MODE.TRANSIT,
           transit_mode: TRANSIT_MODE.SUBWAY,
-          transit_routing_preference: TRANSIT_ROUTING_PREFERENCE.FEWER_TRANSFERS,
+          transit_routing_preference:
+            TRANSIT_ROUTING_PREFERENCE.FEWER_TRANSFERS,
           arrival_time: `${tomorrow2amUnitsecond}`,
           language: LANGUAGE.KO,
           key: GOOGLE.APIKEY,
@@ -159,16 +169,24 @@ export default function Home(props) {
 
   let contexts;
   if (!to.value || !from.value || !departureTimeInfo.text) {
-    // if(0){
     contexts = (
-      <View>
-        <Text>Set Alarm first</Text>
+      <View style={styles.container}>
+        <MaterialCommunityIcons
+          style={styles.pinIcon}
+          name="bus-clock"
+          size={100}
+          color="#fff"
+        />
         <Button
-          title="Set Alarm"
+          buttonStyle={{
+            backgroundColor: 'transparent',
+            width: 200,
+          }}
+          titleStyle={{ fontWeight: '800', color: '#fff' }}
+          title="SET ALARM"
           onPress={() => {
             props.navigation.navigate('SetLocation', {});
-          }}
-        />
+          }}></Button>
       </View>
     );
   } else if (!props.screenProps.isDirectionDetailsOn) {
@@ -217,20 +235,32 @@ const styles = StyleSheet.create({
   container: {
     width: width,
     flex: 1,
-    backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#000',
   },
   settingManager: {
     flex: 1,
     width: width,
   },
   selectedLocations: {
-    flex: 1,
+    flex: 0.5,
     width: width,
   },
   alarmTimers: {
     flex: 2,
     width: width,
+  },
+  pinIcon: {
+    width: 100,
+    marginLeft: 20
+    // shadowColor: 'white',
+    // shadowOpacity: 0.5,
+    // shadowRadius: 5,
+    // //ios
+    // shadowOffset: { width: 1, height: 6 },
+    // textShadowRadius: 10,
+    // //android
+    // textShadowOffset: { width: 1, height: 2 },
   },
 });

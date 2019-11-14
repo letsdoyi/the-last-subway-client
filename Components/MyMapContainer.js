@@ -40,7 +40,7 @@ export default function MyMapContainer(props) {
         !!screenProps.from.location.latitude && (
           <View>
             <MapInputs
-              styles = {styles.mapInputs}
+              styles={styles.mapInputs}
               screenProps={props.screenProps}
             />
             <MyMapView
@@ -57,12 +57,13 @@ export default function MyMapContainer(props) {
 
 const styles = StyleSheet.create({
   container: {
-    position:'relative',
+    position: 'relative',
     backgroundColor: '#ddd',
     alignItems: 'center',
     justifyContent: 'center',
   },
   mapInputs: {
-    width: '100%'
-  }
+    width: '100%',
+  },
+
 });
