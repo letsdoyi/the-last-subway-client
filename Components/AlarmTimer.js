@@ -35,6 +35,7 @@ export default function AlarmTimer(props) {
   // const textContainerStyleArr = [styles.textContainer];
   const timersListArr = [styles.timersList];
   const iconStyleArr = [styles.bellIcon];
+  const hourStyleArr = [styles.hour];
   const departuretime = props.screenProps.departureTimeInfo.valueUnitMilisecond;
   const currentTime = props.screenProps.currentTimeUnitMilisecond;
   const differenceUnitMilisecond = departuretime - currentTime;
@@ -46,8 +47,9 @@ export default function AlarmTimer(props) {
       clearTimeout(timer);
     });
     // textContainerStyleArr.push(styles.opacity);
-    iconStyleArr.push(styles.opacity);
-    timersListArr.push(styles.opacity);
+    iconStyleArr.push(styles.gray);
+    timersListArr.push(styles.gray);
+    hourStyleArr.push(styles.gray);
   }
   if (props.screenProps.isAlarmOn) {
     const timer = setTimeout(
@@ -59,13 +61,17 @@ export default function AlarmTimer(props) {
 
   return (
     <View style={styles.container}>
-      <Switch
-        style={styles.switch}
-        value={props.screenProps.isAlarmOn}
-        onValueChange={() =>
-          props.screenProps.setIsAlarmOnTo(!props.screenProps.isAlarmOn)
-        }
-      />
+      <View style={styles.switchWrapper}>
+        <Text style={styles.switchTitle}>Leaving Time Schedule</Text>
+        <Switch
+          style={styles.switch}
+          value={props.screenProps.isAlarmOn}
+          onValueChange={() =>
+            props.screenProps.setIsAlarmOnTo(!props.screenProps.isAlarmOn)
+          }
+        />
+      </View>
+
       <ScrollView scrollEnabled={true}>
         <TouchableHighlight
           style={styles.textContainer}
@@ -77,12 +83,12 @@ export default function AlarmTimer(props) {
             <Text style={styles.time}>
               {props.screenProps.departureTimeInfo.text}
             </Text>
-            <Text style={styles.hour}>{differenceFromNow}</Text>
+            <Text style={hourStyleArr}>{differenceFromNow}</Text>
             <MaterialCommunityIcons
               style={iconStyleArr}
               name="bell"
               size={30}
-              color="#000000"
+              color="#ff9d0a"
             />
             <Text style={timersListArr}>{alarmTimers.join(' | ')}</Text>
           </View>
@@ -98,44 +104,58 @@ const screenRatio = (width * height) / 100;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    top: height * 0.08,
+    top: height * 0.05,
     height: '50%',
     flexDirection: 'column',
     borderWidth: 1,
     paddingVertical: 50,
     paddingHorizontal: 10,
-    backgroundColor: '#ddd',
+    backgroundColor: '#000',
   },
   textContainer: {
-    backgroundColor: '#aaa',
+  },
+  switchWrapper:{
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection:'row',
+    borderColor: 'rgb(99,99,102)',
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    paddingVertical: 10,
+    marginBottom: screenRatio * 0.01,
+  },
+  switchTitle:{
+    color: '#fff',
+    fontWeight: '500',
+    fontSize: 20
   },
   switch: {
-    marginBottom: screenRatio * 0.01,
   },
   title: {
     fontSize: height / 20,
     textAlign: 'center',
     marginBottom: screenRatio * 0.005,
+    color: '#fff'
   },
   time: {
     fontSize: height / 30,
     textAlign: 'center',
     marginBottom: screenRatio * 0.005,
+    color: '#fff'
   },
   hour: {
     fontSize: height / 15,
     textAlign: 'center',
     fontWeight: '700',
     marginBottom: screenRatio * 0.005,
+    color: '#fff'
   },
   timersList: {
     width: width * 0.9,
     fontSize: height / 30,
     textAlign: 'center',
     marginBottom: screenRatio * 0.005,
-  },
-  opacity: {
-    opacity: 0.3,
+    color: '#ff9d0a'
   },
   bellIcon: {
     width: 30,
@@ -146,4 +166,7 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
     paddingHorizontal: 10,
   },
+  gray: {
+    color: 'rgb(99,99,102)'
+  }
 });

@@ -78,6 +78,7 @@ export default function MyMapView(props) {
           this.map = map;
         }}
         onRegionChangeComplete={region => {
+          console.log('onRegionChangeComplete:', region)
           screenProps.onMarkerChange(region.latitude, region.longitude);
         }}></MapView>
       <MaterialIcons
