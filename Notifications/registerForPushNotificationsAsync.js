@@ -2,26 +2,44 @@
 import * as Permissions from 'expo-permissions';
 import { Notifications } from 'expo';
 import Constants from 'expo-constants';
+import getEnvVars from '../environment';
+import axios from 'axios';
+const { apiUrl } = getEnvVars();
 
-async function registerForPushNotificationsAsync() {
-  if (Constants.isDevice) {
-    const { status: existingStatus } = await Permissions.getAsync(
-      Permissions.NOTIFICATIONS
-    );
-    let finalStatus = existingStatus;
-    if (existingStatus !== 'granted') {
-      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-      finalStatus = status;
-    }
-    if (finalStatus !== 'granted') {
-      // alert('Failed to get push token for push notification!');
-      return;
-    }
-    let token = await Notifications.getExpoPushTokenAsync();
-    console.log('token:', token);
-  } else {
-    // alert('Must use physical device for Push Notifications');
+export default async function registerForPushNotificationsAsync() {
+  const { status: existingStatus } = await Permissions.getAsync(
+    Permissions.NOTIFICATIONS
+  );
+  let finalStatus = existingStatus;
+
+  // only ask if permissions have not already been determined, because
+  // iOS won't necessarily prompt the user a second time.
+  if (existingStatus !== 'granted') {
+    // Android remote notification permissions are granted during the app
+    // install, so this will only ask on iOS
+    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    finalStatus = status;
   }
-}
 
-export default registerForPushNotificationsAsync;
+  // Stop here if the user did not grant permissions
+  if (finalStatus !== 'granted') {
+    alert('use phone');
+    return;
+  }
+
+  // Get the token that uniquely identifies this device
+  let token = await Notifications.getExpoPushTokenAsync();
+
+  // POST the token to your backend server from where you can retrieve it to send push notifications.
+  return axios.post(`${apiUrl}/users/push-token`, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    data: {
+      token: {
+        value: token,
+      },
+    },
+  });
+}

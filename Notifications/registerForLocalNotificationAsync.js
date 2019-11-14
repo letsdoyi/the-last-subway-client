@@ -47,6 +47,7 @@ export default async function registerForLocalNotificationsAsync(
     Notifications.createChannelAndroidAsync(CHANNEL_ID, {
       name: CHANNEL_ID,
       priority: PRIORITY.MAX,
+      sound: SOUND_ON,
       vibrate: VIBRATE,
     });
   }
@@ -78,7 +79,6 @@ export default async function registerForLocalNotificationsAsync(
         data: DATA,
         android: {
           channelId: CHANNEL_ID,
-          sound: SOUND_ON,
           icon: ICON_URL,
           link: LINK_URL,
         },
@@ -94,9 +94,9 @@ export default async function registerForLocalNotificationsAsync(
       hourMiniteString = 'now';
     }
     const timerValueUnitMilisecond = minuteToMiliseconds(timerValueUnitMinute);
-    console.log('time');
-    console.log(typeof departureTimeValueUnitMilisecond)
-    console.log(typeof timerValueUnitMilisecond)
+    // console.log('time');
+    // console.log(typeof departureTimeValueUnitMilisecond)
+    // console.log(typeof timerValueUnitMilisecond)
     const optionsForProduct = {
       notification: {
         title: TITLE,
