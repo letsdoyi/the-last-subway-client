@@ -279,7 +279,15 @@ export default function AlarmTimer(props) {
   // const context = directions.legs[0].steps.map(step => {
   const context = props.screenProps.directions.legs.map(leg => {
     return leg.steps.map(step => {
-      step.html_instructions = step.html_instructions.replace('대한민국 ', '');
+      if (
+        step.html_instructions &&
+        step.html_instructions.indexOf('대한민국') !== -1
+      ) {
+        step.html_instructions = step.html_instructions.replace(
+          '대한민국 ',
+          ''
+        );
+      }
       if (step.travel_mode === 'WALKING') {
         stepsSummaryArr.push({
           travel_mode: step.travel_mode,
@@ -289,7 +297,12 @@ export default function AlarmTimer(props) {
           <View style={styles.routesContainer}>
             <View style={styles.leftSection}>
               <Image
-                style={{ width: 20, height: 20 }}
+                style={{
+                  width: 15,
+                  height: 15,
+                  borderRadius: '7.5',
+                  marginLeft: 5,
+                }}
                 source={{
                   uri:
                     'https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_directions_walk_48px-512.png',
@@ -302,7 +315,7 @@ export default function AlarmTimer(props) {
             </View>
             <View style={styles.rightSection}>
               <Text style={styles.contextBody}>{step.html_instructions}</Text>
-              <Text>
+              <Text style={styles.stops}>
                 Walk {step.duration.text} | {step.distance.text}
               </Text>
             </View>
@@ -322,6 +335,8 @@ export default function AlarmTimer(props) {
                 style={{
                   width: 15,
                   height: 15,
+                  borderRadius: '7.5',
+                  marginLeft: 5,
                 }}
                 source={{
                   uri: `http:${step.transit_details.line.vehicle.icon}`,
@@ -442,11 +457,7 @@ export default function AlarmTimer(props) {
           props.screenProps.setIsDirectionDetailsTo(false);
         }}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Ionicons
-            name="ios-arrow-back"
-            size={30}
-            color="#000000"
-          />
+          <Ionicons name="ios-arrow-back" size={30} color="#007bff" />
           <Text style={styles.backText}>Back</Text>
         </View>
       </TouchableHighlight>
@@ -456,7 +467,7 @@ export default function AlarmTimer(props) {
             <Text style={styles.time}>
               {props.screenProps.directions.legs[0].duration.text}
             </Text>
-            <Text>
+            <Text style={styles.contextBody}>
               {props.screenProps.directions.legs[0].departure_time.text} ~
               {props.screenProps.directions.legs[0].arrival_time.text}
             </Text>
@@ -472,6 +483,7 @@ export default function AlarmTimer(props) {
           <Text
             style={{
               fontSize: 10,
+              color: '#fff',
             }}>
             심야버스의 소요시간은 정확하지 않을 수 있습니다.
           </Text>
@@ -493,11 +505,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     paddingVertical: 10,
     paddingHorizontal: 10,
-    backgroundColor: '#ddd',
+    backgroundColor: '#000',
   },
   textContainer: {
     height: screenRatio * 0.015,
-    backgroundColor: '#aaaaaa',
     justifyContent: 'center',
   },
   timesContainer: {
@@ -510,6 +521,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     marginBottom: screenRatio * 0.001,
   },
+  stepsSummaryArr: {},
   switch: {
     marginBottom: screenRatio * 0.01,
   },
@@ -517,17 +529,20 @@ const styles = StyleSheet.create({
     fontSize: height / 20,
     textAlign: 'center',
     marginBottom: screenRatio * 0.005,
+    color: '#fff',
   },
   time: {
     fontSize: height / 30,
     textAlign: 'center',
     paddingRight: 10,
+    color: '#fff',
   },
   hour: {
     fontSize: height / 15,
     textAlign: 'center',
     fontWeight: '700',
     marginBottom: screenRatio * 0.005,
+    color: '#fff',
   },
   separator: {
     marginHorizontal: 20,
@@ -540,16 +555,19 @@ const styles = StyleSheet.create({
   leftSection: {
     width: 20,
     justifyContent: 'center',
+    backgroundColor: 'rgba(44,44,46, 1)',
   },
   separatorSection: {
     position: 'relative',
     width: 13,
+    backgroundColor: 'rgba(44,44,46, 1)',
   },
   rightSection: {
     position: 'relative',
     flex: 8,
     justifyContent: 'space-between',
     padding: width * 0.02,
+    backgroundColor: 'rgba(44,44,46, 1)',
   },
   lineText: {
     position: 'absolute',
@@ -561,12 +579,15 @@ const styles = StyleSheet.create({
   },
   contextTitle: {
     fontSize: height / 45,
+    color: '#fff',
   },
   contextBody: {
     fontSize: height / 50,
+    color: '#fff',
   },
   stops: {
     paddingVertical: 10,
+    color: '#fff',
   },
   steps: {
     alignContent: 'center',
@@ -579,5 +600,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingLeft: 10,
     justifyContent: 'center',
+    color: '#007bff',
   },
 });
