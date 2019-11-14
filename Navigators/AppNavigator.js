@@ -12,48 +12,48 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { View, Text } from 'react-native';
 // Create our stack navigator
 
-function navigationOptionss(title) {
+function navigationOptions(title, backgroundColor = '#000', fontColor = 'transparent') {
   return {
     headerTitle: (
-      <View style={{ width: '100%' }}>
-        <Text style={{ color: '#000', fontSize: 18, textAlign: 'center' }}>
+      <View style={{ width: '100%'}}>
+        <Text style={{ color: fontColor, fontSize: 18, textAlign: 'center' }}>
           {title}
         </Text>
       </View>
     ),
     headerTransparent: true,
-    headerStyle: { borderBottomWidth: 0 },
+    headerStyle: { borderBottomWidth: 0, backgroundColor: backgroundColor},
   };
 }
 const AppNavigator = createStackNavigator(
   {
     Home: {
       screen: Home,
-      navigationOptions: navigationOptionss('Home'),
+      navigationOptions: navigationOptions('Home', '#000'),
     },
     SetLocation: {
       screen: SetLocation,
-      navigationOptions: navigationOptionss('Set Location'),
+      navigationOptions: navigationOptions('Set Location', 'transparent'),
     },
     AlarmTimer: {
       screen: AlarmTimer,
-      navigationOptions: navigationOptionss('AlarmTimer'),
+      navigationOptions: navigationOptions('AlarmTimer', '#000'),
     },
     MultipleSelection: {
       screen: MultipleSelection,
-      navigationOptions: navigationOptionss('AHEAD OF TIME ACTIVE'),
+      navigationOptions: navigationOptions('AHEAD OF TIME ACTIVE', '#000'),
     },
     SelectedLocations: {
       screen: SelectedLocations,
-      navigationOptions: navigationOptionss('SelectedLocations'),
+      navigationOptions: navigationOptions('SelectedLocations', '#000'),
     },
     SettingManager: {
       screen: SettingManager,
-      navigationOptions: navigationOptionss('SettingManager'),
+      navigationOptions: navigationOptions('SettingManager', '#000'),
     },
     DirectionDetails: {
       screen: DirectionDetails,
-      navigationOptions: navigationOptionss('DirectionDetails'),
+      navigationOptions: navigationOptions('DirectionDetails', '#000'),
     }
   },
   {
