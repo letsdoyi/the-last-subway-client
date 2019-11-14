@@ -2,7 +2,6 @@ import actionTypes from '../Constants/actionTypes';
 const { GOT_DEPARTURE_TIME_INFO, RESET_STATE } = actionTypes;
 
 function departureTimeInfoReducer(state = {}, action) {
-  console.log('departureTimeInfoReducer ON');
   switch (action.type) {
     case GOT_DEPARTURE_TIME_INFO:
       const text = action.data.text;

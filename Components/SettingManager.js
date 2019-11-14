@@ -1,19 +1,8 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  ScrollView,
-  Switch,
-  Dimensions,
-} from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 
 export default function SettingManager(props) {
-  // let { screenProps, navigation } = props;
-  // console.log('resetState:', screenProps.resetState);
-
   return (
     <View style={styles.container}>
       <TouchableHighlight

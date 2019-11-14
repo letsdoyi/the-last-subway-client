@@ -1,10 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Dimensions, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 export default function LocationItem(props) {
-  const { description, fetchDetails } = props;
-  // console.log('LocationItem Props');
-  // console.log(props);
+  const { description } = props;
 
   return (
     <TouchableOpacity style={styles.container}>

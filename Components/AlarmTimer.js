@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
-  Image,
   View,
-  Button,
   ScrollView,
   Switch,
   Dimensions,
@@ -14,14 +12,10 @@ import {
   minuteToStringHourMinite,
   secondsToStringHourMiniteSecond,
 } from '../Utils/utils';
-import SetLocation from './SetLocation';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function AlarmTimer(props) {
-  // console.log('SetLocation props:', props);
-  // const { screenProps } = props;
-  const { container, header, title, front } = styles;
-  const alarmTimers = props.screenProps.alarmTimers.map((timerValue) => {
+  const alarmTimers = props.screenProps.alarmTimers.map(timerValue => {
     switch (timerValue) {
       case '-1':
         return 'Now';
@@ -32,7 +26,6 @@ export default function AlarmTimer(props) {
     }
   });
   const timers = [];
-  // const textContainerStyleArr = [styles.textContainer];
   const timersListArr = [styles.timersList];
   const iconStyleArr = [styles.bellIcon];
   const hourStyleArr = [styles.hour];
@@ -46,7 +39,6 @@ export default function AlarmTimer(props) {
     timers.forEach(timer => {
       clearTimeout(timer);
     });
-    // textContainerStyleArr.push(styles.opacity);
     iconStyleArr.push(styles.gray);
     timersListArr.push(styles.gray);
     hourStyleArr.push(styles.gray);
@@ -64,7 +56,6 @@ export default function AlarmTimer(props) {
       <View style={styles.switchWrapper}>
         <Text style={styles.switchTitle}>Leaving Time Schedule</Text>
         <Switch
-          style={styles.switch}
           value={props.screenProps.isAlarmOn}
           onValueChange={() =>
             props.screenProps.setIsAlarmOnTo(!props.screenProps.isAlarmOn)
@@ -73,7 +64,6 @@ export default function AlarmTimer(props) {
       </View>
       <ScrollView scrollEnabled={true}>
         <TouchableHighlight
-          style={styles.textContainer}
           onPress={() => {
             props.screenProps.setIsDirectionDetailsTo(true);
           }}>
@@ -111,50 +101,46 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: '#000',
   },
-  textContainer: {
-  },
-  switchWrapper:{
+  switchWrapper: {
     justifyContent: 'space-between',
     alignItems: 'center',
-    flexDirection:'row',
+    flexDirection: 'row',
     borderColor: 'rgb(99,99,102)',
     borderTopWidth: 1,
     borderBottomWidth: 1,
     paddingVertical: 10,
     marginBottom: screenRatio * 0.01,
   },
-  switchTitle:{
+  switchTitle: {
     color: '#fff',
     fontWeight: '500',
-    fontSize: 20
-  },
-  switch: {
+    fontSize: 20,
   },
   title: {
     fontSize: height / 20,
     textAlign: 'center',
     marginBottom: screenRatio * 0.005,
-    color: '#fff'
+    color: '#fff',
   },
   time: {
     fontSize: height / 30,
     textAlign: 'center',
     marginBottom: screenRatio * 0.005,
-    color: '#fff'
+    color: '#fff',
   },
   hour: {
     fontSize: height / 15,
     textAlign: 'center',
     fontWeight: '700',
     marginBottom: screenRatio * 0.005,
-    color: '#fff'
+    color: '#fff',
   },
   timersList: {
     width: width * 0.9,
     fontSize: height / 30,
     textAlign: 'center',
     marginBottom: screenRatio * 0.005,
-    color: '#ff9d0a'
+    color: '#ff9d0a',
   },
   bellIcon: {
     width: 30,
@@ -166,6 +152,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   gray: {
-    color: 'rgb(99,99,102)'
-  }
+    color: 'rgb(99,99,102)',
+  },
 });

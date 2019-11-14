@@ -1,11 +1,10 @@
 import React from 'react';
 import MyMapContainer from './MyMapContainer';
-import { StyleSheet, Text, View, ScrollView, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { Button } from 'react-native-elements';
 
 export default function SetLocation(props) {
-  // console.log('SetLocation props:', props);
-  const { container, header, title, containerWrapper } = styles;
+  const { containerWrapper } = styles;
   const { to, from } = props.screenProps;
   let button;
   if (
@@ -20,7 +19,7 @@ export default function SetLocation(props) {
   ) {
     button = (
       <Button
-        buttonStyle={{backgroundColor: '#000'}}
+        buttonStyle={{ backgroundColor: '#000' }}
         titleStyle={{ fontWeight: '500' }}
         title="DONE"
         onPress={() => {

@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
   View,
-  Button,
   ScrollView,
-  Switch,
   Image,
   Dimensions,
   TouchableHighlight,
@@ -18,9 +16,6 @@ import Steps from './Steps';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function AlarmTimer(props) {
-  console.log('SetLocation props:', props);
-  // const { screenProps } = props;
-  const { container, header, title, front } = styles;
   const alarmTimers = props.screenProps.alarmTimers.map(timerValue => {
     switch (timerValue) {
       case '-1':
@@ -277,7 +272,7 @@ export default function AlarmTimer(props) {
   // };
   let stepsSummaryArr = [];
   // const context = directions.legs[0].steps.map(step => {
-  const context = props.screenProps.directions.legs.map((leg) => {
+  const context = props.screenProps.directions.legs.map(leg => {
     return leg.steps.map((step, index) => {
       if (
         step.html_instructions &&
@@ -341,7 +336,6 @@ export default function AlarmTimer(props) {
                 }}
                 resizeMode={'cover'}
               />
-              {/* <Text>{step.transit_details.line.vehicle.type}</Text> */}
             </View>
             <View style={styles.separatorSection}>
               <Steps
@@ -356,7 +350,6 @@ export default function AlarmTimer(props) {
                     backgroundColor: step.transit_details.line.color,
                     color: step.transit_details.line.text_color,
                     padding: 10,
-                    // color: step.transit_details.line.color,
                     fontWeight: '700',
                   },
                   styles.lineText,

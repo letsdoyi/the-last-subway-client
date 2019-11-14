@@ -56,7 +56,6 @@ const mapDispatchToProps = dispatch => {
       });
     },
     setValueOfTo: text => {
-      console.log('setValueOfTo ON');
       dispatch({
         type: SET_VALUE_OF_TO,
         data: text,
@@ -92,7 +91,6 @@ const mapDispatchToProps = dispatch => {
       });
     },
     resetState: () => {
-      console.log('resetState ON');
       dispatch({
         type: RESET_STATE,
       });

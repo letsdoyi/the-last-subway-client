@@ -1,7 +1,5 @@
-import common from '../Constants/common';
 import actionTypes from '../Constants/actionTypes';
 
-const { CURRENT_LOCATION } = common;
 const {
   GOT_CURRENT_LOCATION,
   SET_VALUE_OF_TO,

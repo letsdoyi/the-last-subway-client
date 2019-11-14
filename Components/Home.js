@@ -11,7 +11,6 @@ import axios from 'axios';
 //for noticifation
 import { Notifications } from 'expo';
 import registerForLocalNotificationAsync from '../Notifications/registerForLocalNotificationAsync';
-// import registerForPushNotificationsAsync from '../Notifications/registerForPushNotificationsAsync';
 
 import { GOOGLE_API } from '../Constants/Apis';
 const { DIRECTIONS, GEOCODE } = GOOGLE_API;
@@ -20,7 +19,6 @@ import credentials from '../credentials';
 const { GOOGLE } = credentials;
 
 export default function Home(props) {
-  // console.info('HOME props:', props);
   const { screenProps, navigation } = props;
   const {
     to,
@@ -50,8 +48,6 @@ export default function Home(props) {
       latitude = null,
       longitude = null
     ) {
-      // console.log('fetchPlaceDetailsBy ON');
-      // console.log('latitude,longitude', latitude, longitude);
       if (latitude && longitude) {
         const response = await axios.get(GEOCODE.URL, {
           params: {
@@ -60,7 +56,6 @@ export default function Home(props) {
             key: GOOGLE.APIKEY,
           },
         });
-        console.log('response:', response);
         if (response.status === 200) {
           const formattedAddress = response.data.results[0].formatted_address;
           setValueOfTo(formattedAddress);
@@ -69,25 +64,16 @@ export default function Home(props) {
         } else {
           setValueOfTo('Loading...');
         }
-      } else if (value) {
-        //location Search by name
       }
     }
   }, [to.location.longitude]);
 
-  // console.log('isAlarmOn', isAlarmOn);
-  // console.log('isReadyToGetDirections:', isReadyToGetDirections);
-
   useEffect(() => {
     const selectedTimers = alarmTimers;
     fetchDirectionsAsync();
-    // console.log('departureTimeInfo:', departureTimeInfo);
     if (Object.values(departureTimeInfo).length === 0) {
-      // console.log('no departureTimeInfo');
     } else {
       selectedTimers.forEach(timerValueUnitMinute => {
-        // console.log('selectedTimers:', timerValueUnitMinute);
-        // console.log('잘나오나', departureTimeInfo.valueUnitMilisecond);
         triggerLocalNotificationFunction(
           timerValueUnitMinute,
           departureTimeInfo.valueUnitMilisecond
@@ -125,27 +111,18 @@ export default function Home(props) {
       });
       if (isAlarmOn && isReadyToGetDirections) {
         const directionsApiResult = response.data;
-        console.log('directionsApiResult:', directionsApiResult);
         if (directionsApiResult.status === 'OK') {
-          // console.log(
-          //   'status 확인:',
-          //   directionsApiResult.routes[0].legs[0].departure_time
-          // );
+          directionsApiResult.routes[0].legs[0].departure_time;
           setDepartureTimeInfo(
             directionsApiResult.routes[0].legs[0].departure_time
           );
           setDirections(directionsApiResult.routes[0]);
         } else {
-          // console.log('Cannot get Any directions info');
           alert('Cannot get Any directions info, Try again!');
         }
       }
     }
   }, [isReadyToGetDirections]);
-
-  // async function triggerPushNotificationFunction() {
-  //   await registerForPushNotificationsAsync();
-  // }
 
   async function triggerLocalNotificationFunction(
     timerValueUnitMinute,
@@ -160,7 +137,6 @@ export default function Home(props) {
   Notifications.addListener(handleNotification);
 
   function handleNotification() {
-    // console.log('handleNotification on');
     props.navigation.navigate('Alarm', {
       itemId: 86,
       otherParam: 'anything you want here',
@@ -253,14 +229,6 @@ const styles = StyleSheet.create({
   },
   pinIcon: {
     width: 100,
-    marginLeft: 20
-    // shadowColor: 'white',
-    // shadowOpacity: 0.5,
-    // shadowRadius: 5,
-    // //ios
-    // shadowOffset: { width: 1, height: 6 },
-    // textShadowRadius: 10,
-    // //android
-    // textShadowOffset: { width: 1, height: 2 },
+    marginLeft: 20,
   },
 });

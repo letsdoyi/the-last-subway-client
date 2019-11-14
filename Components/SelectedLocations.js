@@ -1,15 +1,7 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  ScrollView,
-  Dimensions,
-} from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 
 export default function SelectedLocations(props) {
-  // console.log('SelectedLocations props:', props);
   const { screenProps } = props;
   return (
     <View style={styles.container}>

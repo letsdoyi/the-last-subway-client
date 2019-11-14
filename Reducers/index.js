@@ -20,5 +20,5 @@ export default combineReducers({
   departureTimeInfo: departureTimeInfoReducer,
   currentTimeUnitMilisecond: currentTimeUnitMilisecondReducer,
   isDirectionDetailsOn: isDirectionDetailsOnReducer,
-  isEditModeOn: isEditModeOnReducer
+  isEditModeOn: isEditModeOnReducer,
 });

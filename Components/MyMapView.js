@@ -1,21 +1,12 @@
 import React from 'react';
 import MapView from 'react-native-maps';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  Dimensions,
-  Image,
-} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons';
-import { initialState } from 'react-native-google-autocomplete';
 
 export default function MyMapView(props) {
-  // console.log('MyMapView props:', props);
   const { screenProps } = props;
-  const { Marker, PROVIDER_GOOGLE } = MapView;
+  const { PROVIDER_GOOGLE } = MapView;
 
   const styles = StyleSheet.create({
     container: {
@@ -79,7 +70,8 @@ export default function MyMapView(props) {
         }}
         onRegionChangeComplete={region => {
           screenProps.onMarkerChange(region.latitude, region.longitude);
-        }}></MapView>
+        }}
+      />
       <MaterialIcons
         style={styles.pinIcon}
         name="location-on"

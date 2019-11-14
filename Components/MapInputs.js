@@ -7,8 +7,7 @@ import {
   Dimensions,
   View,
 } from 'react-native';
-import { Entypo,
-  MaterialCommunityIcons } from '@expo/vector-icons';
+import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import common from '../Constants/common';
 import LocationItem from './LocationItem';
 import credentials from '../credentials';
@@ -32,7 +31,7 @@ const styles = StyleSheet.create({
     width: '90%',
     height: 35,
     margin: 3,
-    color: '#fff'
+    color: '#fff',
   },
   backgroudColorLightGray: {
     backgroundColor: 'rgba(0,0,0,.7)',
@@ -47,7 +46,6 @@ const styles = StyleSheet.create({
 });
 
 export default function MapInput(props) {
-  // console.log('MapInput props:', props);
   const { screenProps } = props;
 
   return (
@@ -60,8 +58,11 @@ export default function MapInput(props) {
         components="country:us">
         {({ inputValue, handleTextChange, locationResults, fetchDetails }) => (
           <Fragment>
-            {console.log('inputValue', inputValue)}
-            <View style={[styles.inputIconSetWrapper, styles.backgroudColorLightGray]}>
+            <View
+              style={[
+                styles.inputIconSetWrapper,
+                styles.backgroudColorLightGray,
+              ]}>
               <Entypo
                 style={styles.fromIcon}
                 name="dot-single"
@@ -100,7 +101,11 @@ export default function MapInput(props) {
         components="country:ko">
         {({ inputValue, handleTextChange, locationResults, fetchDetails }) => (
           <Fragment>
-            <View style={[styles.inputIconSetWrapper, styles.backgroudColorDarkGray]}>
+            <View
+              style={[
+                styles.inputIconSetWrapper,
+                styles.backgroudColorDarkGray,
+              ]}>
               <MaterialCommunityIcons
                 style={styles.fromIcon}
                 name="square-medium-outline"

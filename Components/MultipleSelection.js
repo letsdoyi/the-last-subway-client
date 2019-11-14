@@ -46,7 +46,6 @@ const items = [
 export default class multiSelectWrapper extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     if (props.screenProps.isEditModeOn === true) {
       this.state = {
         isSelectedItemsDone: false,
@@ -61,9 +60,7 @@ export default class multiSelectWrapper extends Component {
   }
 
   onSelectedItemsChange = selectedItems => {
-    this.setState({ selectedItems }, () =>
-      console.log('Selected Items: ', selectedItems)
-    );
+    this.setState({ selectedItems });
   };
 
   render() {
@@ -109,7 +106,6 @@ export default class multiSelectWrapper extends Component {
             fontSize={20}
             textInputProps={{ editable: false }}
             hideSubmitButton={true}
-            // hideTags={true}
           />
         </View>
         <View style={styles.button}>

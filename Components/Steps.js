@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Dimensions, Button } from 'react-native';
+import { View } from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
 
-const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
 export default class Steps extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +35,7 @@ export default class Steps extends Component {
 
   render() {
     return (
-      <View style={{ height: '100%', }}>
+      <View style={{ height: '100%' }}>
         <StepIndicator
           direction={'vertical'}
           stepCount={2}
