@@ -8,6 +8,7 @@ import directionsReadySwitchReducer from './directionsReadySwitchReducer';
 import departureTimeInfoReducer from './departureTimeInfoReducer';
 import currentTimeUnitMilisecondReducer from './currentTimeUnitMilisecondReducer';
 import isDirectionDetailsOnReducer from './isDirectionDetailsOnReducer';
+import isEditModeOnReducer from './isEditModeOnReducer';
 
 export default combineReducers({
   from: fromReducer,
@@ -19,4 +20,5 @@ export default combineReducers({
   departureTimeInfo: departureTimeInfoReducer,
   currentTimeUnitMilisecond: currentTimeUnitMilisecondReducer,
   isDirectionDetailsOn: isDirectionDetailsOnReducer,
+  isEditModeOn: isEditModeOnReducer
 });

@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import actionTypes from '../Constants/actionTypes';
 import AppNavigator from '../Navigators/AppNavigator';
-import currentTimeUnitMilisecondReducer from '../Reducers/currentTimeUnitMilisecondReducer';
 
 const {
   GOT_CURRENT_LOCATION,
@@ -16,7 +15,9 @@ const {
   SET_CURRENT_TIME,
   RESET_STATE,
   EDIT_ALARM_SETTING,
-  SET_IS_DIRECTION_DETAILS_TO
+  SET_IS_DIRECTION_DETAILS_TO,
+  SET_IS_ALARM_ON_TO,
+  SET_IS_EDIT_MODE_ON_TO,
 } = actionTypes;
 
 const mapStateToProps = state => {
@@ -29,7 +30,8 @@ const mapStateToProps = state => {
     isReadyToGetDirections: state.isReadyToGetDirections,
     departureTimeInfo: state.departureTimeInfo,
     currentTimeUnitMilisecond: state.currentTimeUnitMilisecond,
-    isDirectionDetailsOn: state.isDirectionDetailsOn
+    isDirectionDetailsOn: state.isDirectionDetailsOn,
+    isEditModeOn: state.isEditModeOn,
   };
 };
 
@@ -97,15 +99,27 @@ const mapDispatchToProps = dispatch => {
     },
     editAlarmSetting: () => {
       dispatch({
-        type: EDIT_ALARM_SETTING
-      })
+        type: EDIT_ALARM_SETTING,
+      });
     },
     setIsDirectionDetailsTo: boolean => {
       dispatch({
         type: SET_IS_DIRECTION_DETAILS_TO,
-        data: boolean
+        data: boolean,
       });
-    }
+    },
+    setIsAlarmOnTo: boolean => {
+      dispatch({
+        type: SET_IS_ALARM_ON_TO,
+        data: boolean,
+      });
+    },
+    setIsEditModeOnTo: boolean => {
+      dispatch({
+        type: SET_IS_EDIT_MODE_ON_TO,
+        data: boolean,
+      });
+    },
   };
 };
 

@@ -44,10 +44,21 @@ const items = [
 ];
 
 export default class multiSelectWrapper extends Component {
-  state = {
-    isSelectedItemsDone: false,
-    selectedItems: [],
-  };
+  constructor(props) {
+    super(props);
+    console.log(props);
+    if (props.screenProps.isEditModeOn === true) {
+      this.state = {
+        isSelectedItemsDone: false,
+        selectedItems: props.screenProps.alarmTimers,
+      };
+    } else {
+      this.state = {
+        isSelectedItemsDone: false,
+        selectedItems: [],
+      };
+    }
+  }
 
   onSelectedItemsChange = selectedItems => {
     this.setState({ selectedItems }, () =>
@@ -62,17 +73,22 @@ export default class multiSelectWrapper extends Component {
 
     return (
       <View style={styles.container}>
-        <View><Text style={styles.title}>AHEAD OF TIME ACTIVE</Text></View>
+        <View>
+          <Text style={styles.title}>AHEAD OF TIME ACTIVE</Text>
+        </View>
         <View style={styles.multiSelectContainer}>
           <MultiSelect
             autofocus={false}
-            styleInputGroup={{ backgroundColor: '#000'}}
-            styleDropdownMenuSubsection={{ backgroundColor: '#000', borderWidth: 0}}
-            styleTextDropdownSelected={{color: '#FF9D0A'}}
-            styleDropdownMenu={{backgroundColor: '#000'}}
-            styleTextDropdown={{color: '#FF9D0A', fontWeight:'700'}}
-            styleItemsContainer={{ backgroundColor: '#000'}}
-            styleRowList={{marginBottom: 3}}
+            styleInputGroup={{ backgroundColor: '#000' }}
+            styleDropdownMenuSubsection={{
+              backgroundColor: '#000',
+              borderWidth: 0,
+            }}
+            styleTextDropdownSelected={{ color: '#FF9D0A' }}
+            styleDropdownMenu={{ backgroundColor: '#000' }}
+            styleTextDropdown={{ color: '#FF9D0A', fontWeight: '700' }}
+            styleItemsContainer={{ backgroundColor: '#000' }}
+            styleRowList={{ marginBottom: 3 }}
             items={items}
             uniqueKey="id"
             hideDropdown={true}
@@ -87,11 +103,11 @@ export default class multiSelectWrapper extends Component {
             selectedItemTextColor="#FF9D0A"
             selectedItemIconColor="#FF9D0A"
             itemTextColor="#fff"
-            itemFontSize= {20}
+            itemFontSize={20}
             displayKey="name"
-            searchInputPlaceholderText=''
+            searchInputPlaceholderText=""
             fontSize={20}
-            textInputProps={{editable: false}}
+            textInputProps={{ editable: false }}
             hideSubmitButton={true}
             // hideTags={true}
           />
@@ -124,15 +140,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000',
-    top: 100,
+    top: 80,
     alignItems: 'center',
   },
   title: {
     color: '#fff',
     paddingHorizontal: 10,
     paddingVertical: 50,
-    fontWeight: "900",
-    fontSize: 25
+    fontWeight: '900',
+    fontSize: 25,
   },
   multiSelectContainer: {
     width: '90%',

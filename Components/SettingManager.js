@@ -27,10 +27,7 @@ export default function SettingManager(props) {
 
       <TouchableHighlight
         onPress={() => {
-          alert('Edit');
-          // console.log(props.nav);
-          // console.log(props);
-          // props.screenProps.editAlarmSetting();
+          props.screenProps.setIsEditModeOnTo(true);
           props.navigation.navigate('SetLocation', {});
         }}
         style={[styles.elementWrapper, { paddingLeft: 50 }]}>
@@ -44,8 +41,8 @@ const height = Dimensions.get('window').height;
 const screenRatio = (width * height) / 100;
 const styles = StyleSheet.create({
   container: {
-    height: height * 0.12,
-    backgroundColor: '#ddd',
+    height: height * 0.15,
+    backgroundColor: '#000',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
     flexDirection: 'row',
@@ -59,5 +56,6 @@ const styles = StyleSheet.create({
     fontSize: height / 50,
     textAlign: 'center',
     marginBottom: screenRatio * 0.005,
+    color: '#ff9d0a',
   },
 });
