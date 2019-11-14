@@ -277,8 +277,8 @@ export default function AlarmTimer(props) {
   // };
   let stepsSummaryArr = [];
   // const context = directions.legs[0].steps.map(step => {
-  const context = props.screenProps.directions.legs.map(leg => {
-    return leg.steps.map(step => {
+  const context = props.screenProps.directions.legs.map((leg) => {
+    return leg.steps.map((step, index) => {
       if (
         step.html_instructions &&
         step.html_instructions.indexOf('대한민국') !== -1
@@ -294,13 +294,12 @@ export default function AlarmTimer(props) {
           duration: { text: step.duration.text, value: step.duration.value },
         });
         return (
-          <View style={styles.routesContainer}>
+          <View style={styles.routesContainer} key={index}>
             <View style={styles.leftSection}>
               <Image
                 style={{
                   width: 15,
                   height: 15,
-                  borderRadius: '7.5',
                   marginLeft: 5,
                 }}
                 source={{
@@ -329,13 +328,12 @@ export default function AlarmTimer(props) {
           lineText: step.transit_details.line.short_name,
         });
         return (
-          <View style={styles.routesContainer}>
+          <View style={styles.routesContainer} key={index}>
             <View style={styles.leftSection}>
               <Image
                 style={{
                   width: 15,
                   height: 15,
-                  borderRadius: '7.5',
                   marginLeft: 5,
                 }}
                 source={{
@@ -415,7 +413,7 @@ export default function AlarmTimer(props) {
         stepStyleArr.push(rightHalfCircleStyle);
       }
       return (
-        <View style={stepStyleArr}>
+        <View style={stepStyleArr} key={index}>
           <View>
             <Text
               style={{
@@ -434,7 +432,7 @@ export default function AlarmTimer(props) {
         stepStyleArr.push(rightHalfCircleStyle);
       }
       return (
-        <View style={stepStyleArr}>
+        <View style={stepStyleArr} key={index}>
           <View>
             <Text
               style={{

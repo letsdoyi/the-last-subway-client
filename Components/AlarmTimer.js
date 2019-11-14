@@ -21,7 +21,7 @@ export default function AlarmTimer(props) {
   // console.log('SetLocation props:', props);
   // const { screenProps } = props;
   const { container, header, title, front } = styles;
-  const alarmTimers = props.screenProps.alarmTimers.map(timerValue => {
+  const alarmTimers = props.screenProps.alarmTimers.map((timerValue) => {
     switch (timerValue) {
       case '-1':
         return 'Now';
@@ -71,7 +71,6 @@ export default function AlarmTimer(props) {
           }
         />
       </View>
-
       <ScrollView scrollEnabled={true}>
         <TouchableHighlight
           style={styles.textContainer}
