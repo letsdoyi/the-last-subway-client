@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     width: '90%',
     height: 35,
     margin: 3,
-    color: '#ff9d0a'
+    color: '#fff'
   },
   backgroudColorLightGray: {
     backgroundColor: 'rgba(0,0,0,.7)',
@@ -105,14 +105,14 @@ export default function MapInput(props) {
                 style={styles.fromIcon}
                 name="square-medium-outline"
                 size={38}
-                color={'#000'}
+                color={'#fff'}
               />
               <TextInput
                 style={styles.textInput}
                 value={screenProps.to.value || inputValue}
                 onChangeText={handleTextChange}
                 placeholder={'Where to?'}
-                placeholderTextColor={'#ff9d0a'}
+                placeholderTextColor={'#fff'}
               />
             </View>
             <ScrollView style={{ maxHeight: 100 }}>
