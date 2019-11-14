@@ -10,19 +10,22 @@ import DirectionDetails from '../Components/DirectionDetails';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { View, Text } from 'react-native';
-// Create our stack navigator
 
-function navigationOptions(title, backgroundColor = '#000', fontColor = 'transparent') {
+function navigationOptions(
+  title,
+  backgroundColor = '#000',
+  fontColor = 'transparent'
+) {
   return {
     headerTitle: (
-      <View style={{ width: '100%'}}>
+      <View style={{ width: '100%' }}>
         <Text style={{ color: fontColor, fontSize: 18, textAlign: 'center' }}>
           {title}
         </Text>
       </View>
     ),
     headerTransparent: true,
-    headerStyle: { borderBottomWidth: 0, backgroundColor: backgroundColor},
+    headerStyle: { borderBottomWidth: 0, backgroundColor: backgroundColor },
   };
 }
 const AppNavigator = createStackNavigator(
@@ -54,16 +57,11 @@ const AppNavigator = createStackNavigator(
     DirectionDetails: {
       screen: DirectionDetails,
       navigationOptions: navigationOptions('DirectionDetails', '#000'),
-    }
+    },
   },
   {
     initialRouteName: 'Home',
   }
 );
-// const middlewares = applyMiddleware(
-//   debuggerAPI,
-//   exportState,
-//   reduxAPI
-// );
 
 export default createAppContainer(AppNavigator);

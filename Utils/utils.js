@@ -1,4 +1,8 @@
-export { minuteToStringHourMinite, minuteToMiliseconds, secondsToStringHourMiniteSecond };
+export {
+  minuteToStringHourMinite,
+  minuteToMiliseconds,
+  secondsToStringHourMiniteSecond,
+};
 
 const minuteToStringHourMinite = min => {
   if (min > 60) {
@@ -41,7 +45,5 @@ const toTwoDigitString = num => {
 
 const minuteToMiliseconds = min => {
   min = Number(min);
-  console.log('min typeof', typeof min);
-  console.log(min * 60 * 1000);
   return min * 60 * 1000;
 };

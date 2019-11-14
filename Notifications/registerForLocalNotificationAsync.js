@@ -4,13 +4,11 @@ import noticifationConstants from '../Constants/notification';
 import { Notifications } from 'expo';
 import { Platform } from 'react-native';
 import { minuteToStringHourMinite, minuteToMiliseconds } from '../Utils/utils';
-import notification from '../Constants/notification';
 
 export default async function registerForLocalNotificationsAsync(
   timerValueUnitMinute,
   departureTimeValueUnitMilisecond
 ) {
-  console.log('registerForLocalNotificationsAsync ON');
   const {
     CHANNEL_ID,
     PRIORITY,
@@ -65,10 +63,6 @@ export default async function registerForLocalNotificationsAsync(
       options.scheduling
     );
     return notificationId;
-    // localNotificationIdsQueue.push(notificationId);
-    // localNotificationIdsQueue.forEach(id => {
-    //   Notifications.cancelScheduledNotificationAsync(id)
-    // });
   }
 
   if (isTestMode) {
@@ -94,9 +88,6 @@ export default async function registerForLocalNotificationsAsync(
       hourMiniteString = 'now';
     }
     const timerValueUnitMilisecond = minuteToMiliseconds(timerValueUnitMinute);
-    // console.log('time');
-    // console.log(typeof departureTimeValueUnitMilisecond)
-    // console.log(typeof timerValueUnitMilisecond)
     const optionsForProduct = {
       notification: {
         title: TITLE,
@@ -110,7 +101,7 @@ export default async function registerForLocalNotificationsAsync(
         },
       },
       scheduling: {
-        time: departureTimeValueUnitMilisecond + timerValueUnitMilisecond
+        time: departureTimeValueUnitMilisecond + timerValueUnitMilisecond,
       },
     };
     return await _createNotificationAsync(optionsForProduct);
