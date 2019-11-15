@@ -94,11 +94,12 @@ const screenRatio = (width * height) / 100;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    top: height * 0.05,
     height: '50%',
+    top: 50,
     flexDirection: 'column',
     borderWidth: 1,
-    paddingVertical: 50,
+    marginTop: 20,
+    paddingBottom: 30,
     paddingHorizontal: 10,
     backgroundColor: '#000',
   },

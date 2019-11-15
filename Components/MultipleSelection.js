@@ -92,7 +92,7 @@ export default class multiSelectWrapper extends Component {
             onSelectedItemsChange={this.onSelectedItemsChange}
             searchIcon={searchIcon}
             selectedItems={selectedItems}
-            selectText="      ALARM TIMES"
+            selectText="  ALARM TIMES"
             searchInputPlaceholderText="Search Items..."
             tagRemoveIconColor="#FF9D0A"
             tagBorderColor="#FF9D0A"
@@ -100,10 +100,10 @@ export default class multiSelectWrapper extends Component {
             selectedItemTextColor="#FF9D0A"
             selectedItemIconColor="#FF9D0A"
             itemTextColor="#fff"
-            itemFontSize={20}
+            itemFontSize={16}
             displayKey="name"
             searchInputPlaceholderText=""
-            fontSize={20}
+            fontSize={16}
             textInputProps={{ editable: false }}
             hideSubmitButton={true}
           />
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000',
-    top: 80,
+    top: '5%',
     alignItems: 'center',
   },
   title: {
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 50,
     fontWeight: '900',
-    fontSize: 25,
+    fontSize: 20,
   },
   multiSelectContainer: {
     width: '90%',
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   button: {
     position: 'absolute',
     left: '50%',
-    bottom: '20%',
+    bottom: '10%',
     transform: [{ translateX: -Dimensions.get('window').width * 0.45 }],
     width: '90%',
     backgroundColor: '#000',

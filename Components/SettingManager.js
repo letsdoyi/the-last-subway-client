@@ -30,12 +30,14 @@ const height = Dimensions.get('window').height;
 const screenRatio = (width * height) / 100;
 const styles = StyleSheet.create({
   container: {
-    height: height * 0.15,
+    height: height * 0.10,
+    top: 55,
     backgroundColor: '#000',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
     flexDirection: 'row',
-    paddingHorizontal: width * 0.05,
+    marginHorizontal: 10,
+    marginBottom: 30
   },
   elementWrapper: {
     paddingTop: 10,

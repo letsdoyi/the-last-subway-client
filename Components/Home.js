@@ -231,15 +231,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#000',
   },
   settingManager: {
-    flex: 1,
+    flex: 2,
     width: width,
   },
   selectedLocations: {
-    flex: 0.5,
+    flex: 1,
     width: width,
   },
   alarmTimers: {
-    flex: 2,
+    flex: 5,
     width: width,
   },
   pinIcon: {

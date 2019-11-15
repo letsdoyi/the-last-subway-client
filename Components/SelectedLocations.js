@@ -15,12 +15,12 @@ let height = Dimensions.get('window').height;
 const styles = StyleSheet.create({
   container: {
     width: width,
-    top: '50%',
+    top: 50,
     left: '50%',
     transform: [
       { translateX: -Dimensions.get('window').width * 0.45 },
-      { translateY: -Dimensions.get('window').height * 0.48 },
     ],
+    backgroundColor:'#000'
   },
   textBox: {
     width: '90%',
