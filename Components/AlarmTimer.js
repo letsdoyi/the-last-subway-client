@@ -42,13 +42,14 @@ export default function AlarmTimer(props) {
     iconStyleArr.push(styles.gray);
     timersListArr.push(styles.gray);
     hourStyleArr.push(styles.gray);
-  }
-  if (props.screenProps.isAlarmOn) {
+  } else {
     const timer = setTimeout(
       () => props.screenProps.setCurrentTime(parseInt(new Date().getTime())),
       1000
     );
     timers.push(timer);
+  }
+  if (props.screenProps.isAlarmOn) {
   }
 
   return (

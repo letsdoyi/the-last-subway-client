@@ -25,7 +25,6 @@ export default function Home(props) {
     setValueOfTo,
     from,
     isAlarmOn,
-    directions,
     setDirections,
     alarmTimers,
     isReadyToGetDirections,
@@ -82,43 +81,55 @@ export default function Home(props) {
     }
 
     async function fetchDirectionsAsync() {
+      const todayUnitSecond = new Date().getTime() / 1000;
+      const today12amUnitSecond = new Date().setHours(0, 0, 0, 0) / 1000;
+      const today2amUnitSecond = new Date().setHours(2, 0, 0, 0) / 1000;
       const milisecondsOfoneDay = 1000 * 60 * 60 * 24;
-      const tomorrow2amUnitsecond =
+      const tomorrow2amUnitSecond =
         (new Date().setHours(2, 0, 0, 0) + milisecondsOfoneDay) / 1000;
       // console.log(
       //   'tomorrow2am vscode에서는 왜 다르게 나오는지 질문하기:',
       //   new Date(tomorrow3amUnitsecond * 1000)
       // );
+      if (
+        todayUnitSecond >= today12amUnitSecond &&
+        todayUnitSecond <= today2amUnitSecond
+      ) {
+        triggerDirectionsAxios(today2amUnitSecond);
+      } else {
+        triggerDirectionsAxios(tomorrow2amUnitSecond);
+      }
 
-      const {
-        MODE,
-        TRANSIT_MODE,
-        TRANSIT_ROUTING_PREFERENCE,
-        LANGUAGE,
-      } = DIRECTIONS;
-      const response = await axios.get(DIRECTIONS.URL, {
-        params: {
-          origin: `${from.location.latitude},${from.location.longitude}`,
-          destination: `${to.location.latitude},${to.location.longitude}`,
-          mode: MODE.TRANSIT,
-          transit_mode: TRANSIT_MODE.SUBWAY,
-          transit_routing_preference:
-            TRANSIT_ROUTING_PREFERENCE.FEWER_TRANSFERS,
-          arrival_time: `${tomorrow2amUnitsecond}`,
-          language: LANGUAGE.KO,
-          key: GOOGLE.APIKEY,
-        },
-      });
-      if (isAlarmOn && isReadyToGetDirections) {
-        const directionsApiResult = response.data;
-        if (directionsApiResult.status === 'OK') {
-          directionsApiResult.routes[0].legs[0].departure_time;
-          setDepartureTimeInfo(
-            directionsApiResult.routes[0].legs[0].departure_time
-          );
-          setDirections(directionsApiResult.routes[0]);
-        } else {
-          alert('Cannot get Any directions info, Try again!');
+      async function triggerDirectionsAxios(timeUnitSecond) {
+        const {
+          MODE,
+          TRANSIT_MODE,
+          TRANSIT_ROUTING_PREFERENCE,
+          LANGUAGE,
+        } = DIRECTIONS;
+        const response = await axios.get(DIRECTIONS.URL, {
+          params: {
+            origin: `${from.location.latitude},${from.location.longitude}`,
+            destination: `${to.location.latitude},${to.location.longitude}`,
+            mode: MODE.TRANSIT,
+            transit_mode: TRANSIT_MODE.SUBWAY,
+            transit_routing_preference:
+              TRANSIT_ROUTING_PREFERENCE.FEWER_TRANSFERS,
+            arrival_time: `${timeUnitSecond}`,
+            language: LANGUAGE.KO,
+            key: GOOGLE.APIKEY,
+          },
+        });
+        if (isAlarmOn && isReadyToGetDirections) {
+          const directionsApiResult = response.data;
+          if (directionsApiResult.status === 'OK') {
+            setDepartureTimeInfo(
+              directionsApiResult.routes[0].legs[0].departure_time
+            );
+            setDirections(directionsApiResult.routes[0]);
+          } else {
+            alert('Cannot get Any directions info, Try again!');
+          }
         }
       }
     }
