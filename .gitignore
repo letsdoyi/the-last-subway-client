@@ -18,3 +18,8 @@ credentials
 
 #environment
 environment
+
+#e2e
+bin
+setup.sh
+e2e
