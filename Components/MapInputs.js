@@ -102,6 +102,7 @@ export default function MapInput(props) {
         {({ inputValue, handleTextChange, locationResults, fetchDetails }) => (
           <Fragment>
             <View
+              testID="google"
               style={[
                 styles.inputIconSetWrapper,
                 styles.backgroudColorDarkGray,

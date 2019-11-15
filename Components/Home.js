@@ -12,7 +12,7 @@ import axios from 'axios';
 import { Notifications } from 'expo';
 import registerForLocalNotificationAsync from '../Notifications/registerForLocalNotificationAsync';
 
-import { GOOGLE_API } from '../Constants/Apis';
+import { GOOGLE_API } from '../Constants/apis';
 const { DIRECTIONS, GEOCODE } = GOOGLE_API;
 
 import credentials from '../credentials';
@@ -163,8 +163,12 @@ export default function Home(props) {
           name="bus-clock"
           size={100}
           color="#fff"
+          onPress={() => {
+            props.navigation.navigate('SetLocation', {});
+          }}
         />
         <Button
+          testID=""
           buttonStyle={{
             backgroundColor: 'transparent',
             width: 200,

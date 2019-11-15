@@ -272,7 +272,7 @@ export default function AlarmTimer(props) {
   // };
   let stepsSummaryArr = [];
   // const context = directions.legs[0].steps.map(step => {
-  const context = props.screenProps.directions.legs.map(leg => {
+  const context = props.screenProps.directions.legs.map((leg) => {
     return leg.steps.map((step, index) => {
       if (
         step.html_instructions &&
