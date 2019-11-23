@@ -10,16 +10,18 @@ import DirectionDetails from '../Components/DirectionDetails';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { View, Text } from 'react-native';
+import { colors, aligns } from '../Constants/styles';
 
 function navigationOptions(
   title,
-  backgroundColor = '#000',
-  fontColor = 'transparent'
+  backgroundColor = colors.black,
+  fontColor = colors.transparent
 ) {
   return {
     headerTitle: (
       <View style={{ width: '100%' }}>
-        <Text style={{ color: fontColor, fontSize: 18, textAlign: 'center' }}>
+        <Text
+          style={{ color: fontColor, fontSize: 18, textAlign: aligns.center }}>
           {title}
         </Text>
       </View>
@@ -32,31 +34,37 @@ const AppNavigator = createStackNavigator(
   {
     Home: {
       screen: Home,
-      navigationOptions: navigationOptions('Home', '#000'),
+      navigationOptions: navigationOptions('Home', colors.black),
     },
     SetLocation: {
       screen: SetLocation,
-      navigationOptions: navigationOptions('Set Location', 'transparent'),
+      navigationOptions: navigationOptions('Set Location', colors.transparent),
     },
     AlarmTimer: {
       screen: AlarmTimer,
-      navigationOptions: navigationOptions('AlarmTimer', '#000'),
+      navigationOptions: navigationOptions('AlarmTimer', colors.black),
     },
     MultipleSelection: {
       screen: MultipleSelection,
-      navigationOptions: navigationOptions('AHEAD OF TIME ACTIVE', '#000'),
+      navigationOptions: navigationOptions(
+        'AHEAD OF TIME ACTIVE',
+        colors.black
+      ),
     },
     SelectedLocations: {
       screen: SelectedLocations,
-      navigationOptions: navigationOptions('SelectedLocations', '#000'),
+      navigationOptions: navigationOptions('SelectedLocations', colors.black),
     },
     SettingManager: {
       screen: SettingManager,
-      navigationOptions: navigationOptions('SettingManager', '#000'),
+      navigationOptions: navigationOptions(
+        'SettingManager',
+        colors.transparent
+      ),
     },
     DirectionDetails: {
       screen: DirectionDetails,
-      navigationOptions: navigationOptions('DirectionDetails', '#000'),
+      navigationOptions: navigationOptions('DirectionDetails', colors.black),
     },
   },
   {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { colors } from '../Constants/styles';
 
 export default function SelectedLocations(props) {
   const { screenProps } = props;
@@ -11,7 +12,6 @@ export default function SelectedLocations(props) {
   );
 }
 let width = Dimensions.get('window').width;
-let height = Dimensions.get('window').height;
 const styles = StyleSheet.create({
   container: {
     width: width,
@@ -20,16 +20,16 @@ const styles = StyleSheet.create({
     transform: [
       { translateX: -Dimensions.get('window').width * 0.45 },
     ],
-    backgroundColor:'#000'
+    backgroundColor: colors.black
   },
   textBox: {
     width: '90%',
     height: 35,
     fontSize: 16,
-    color: '#ff9d0a',
+    color: colors.orange,
     margin: 3,
     paddingLeft: 10,
     lineHeight: 35,
-    backgroundColor: 'rgba(44,44,46, 1)',
+    backgroundColor: colors.darkGray,
   },
 });

@@ -18,6 +18,8 @@ const { DIRECTIONS, GEOCODE } = GOOGLE_API;
 import credentials from '../credentials';
 const { GOOGLE } = credentials;
 
+import {colors, aligns} from '../Constants/styles';
+
 export default function Home(props) {
   const { screenProps, navigation } = props;
   const {
@@ -162,7 +164,7 @@ export default function Home(props) {
           style={styles.pinIcon}
           name="bus-clock"
           size={100}
-          color="#fff"
+          color={colors.white}
           onPress={() => {
             props.navigation.navigate('SetLocation', {});
           }}
@@ -170,10 +172,10 @@ export default function Home(props) {
         <Button
           testID=""
           buttonStyle={{
-            backgroundColor: 'transparent',
+            backgroundColor: colors.transparent,
             width: 200,
           }}
-          titleStyle={{ fontWeight: '800', color: '#fff' }}
+          titleStyle={{ fontWeight: '800', color: colors.white }}
           title="SET ALARM"
           onPress={() => {
             props.navigation.navigate('SetLocation', {});
@@ -226,9 +228,9 @@ const styles = StyleSheet.create({
   container: {
     width: width,
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#000',
+    justifyContent: aligns.center,
+    alignItems: aligns.center,
+    backgroundColor: colors.black,
   },
   settingManager: {
     flex: 2,

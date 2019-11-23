@@ -3,6 +3,7 @@ import MapView from 'react-native-maps';
 import { StyleSheet, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons';
+import { colors, aligns } from '../Constants/styles';
 
 export default function MyMapView(props) {
   const { screenProps } = props;
@@ -11,15 +12,15 @@ export default function MyMapView(props) {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
+      backgroundColor: colors.white,
+      alignItems: aligns.center,
+      justifyContent: aligns.center,
     },
     mapStyle: {
       width: '100%',
       height: '100%',
-      alignItems: 'center',
-      justifyContent: 'center',
+      alignItems: aligns.center,
+      justifyContent: aligns.center,
       zIndex: -1,
     },
     pinIcon: {
@@ -27,7 +28,7 @@ export default function MyMapView(props) {
       top: '50%',
       left: '50%',
       transform: [{ translateX: -30 * 0.5 }, { translateY: -30 * 0.7 }],
-      shadowColor: 'black',
+      shadowColor: colors.black,
       shadowOpacity: 0.5,
       shadowRadius: 5,
       //ios
@@ -76,14 +77,14 @@ export default function MyMapView(props) {
         style={styles.pinIcon}
         name="location-on"
         size={45}
-        color="#000"
+        color={colors.black}
       />
       <View style={styles.currentLocationIconWrapper}>
         <Icon
           raised
           name="my-location"
           type="material"
-          color="black"
+          color={colors.black}
           onPress={() => backToCurrent()}
         />
       </View>

@@ -4,6 +4,7 @@ import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
 import MapInputs from './MapInputs';
 import MyMapView from './MyMapView';
+import { colors, aligns } from '../Constants/styles';
 
 export default function MyMapContainer(props) {
   const { screenProps } = props;
@@ -47,9 +48,9 @@ export default function MyMapContainer(props) {
 const styles = StyleSheet.create({
   container: {
     position: 'relative',
-    backgroundColor: '#ddd',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: colors.lightGray,
+    alignItems: aligns.center,
+    justifyContent: aligns.center,
   },
   mapInputs: {
     width: '100%',

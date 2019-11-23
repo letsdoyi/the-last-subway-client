@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
+import { colors } from '../Constants/styles';
 
 export default class Steps extends Component {
   constructor(props) {
@@ -12,20 +13,20 @@ export default class Steps extends Component {
         currentStepIndicatorSize: 13,
         separatorStrokeWidth: 7,
         currentStepStrokeWidth: 2,
-        stepStrokeCurrentColor: '#000',
+        stepStrokeCurrentColor: colors.black,
         stepStrokeWidth: 2,
         separatorUnFinishedColor: props.screenProps.color,
-        stepStrokeUnFinishedColor: '#000',
-        stepIndicatorUnFinishedColor: '#fff',
-        stepIndicatorCurrentColor: '#fff',
+        stepStrokeUnFinishedColor: colors.black,
+        stepIndicatorUnFinishedColor: colors.white,
+        stepIndicatorCurrentColor: colors.white,
         stepIndicatorLabelFontSize: 1,
         currentStepIndicatorLabelFontSize: 0,
-        stepIndicatorLabelCurrentColor: '#fff',
-        stepIndicatorLabelFinishedColor: '#fff',
-        stepIndicatorLabelUnFinishedColor: '#fff',
-        labelColor: '#fff',
+        stepIndicatorLabelCurrentColor: colors.white,
+        stepIndicatorLabelFinishedColor: colors.white,
+        stepIndicatorLabelUnFinishedColor: colors.white,
+        labelColor: colors.white,
         labelSize: 0,
-        currentStepLabelColor: '#fff',
+        currentStepLabelColor: colors.white,
       },
     };
   }

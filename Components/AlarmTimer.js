@@ -12,6 +12,7 @@ import {
   minuteToStringHourMinite,
   secondsToStringHourMiniteSecond,
 } from '../Utils/utils';
+import { colors, aligns } from '../Constants/styles';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function AlarmTimer(props) {
@@ -68,7 +69,11 @@ export default function AlarmTimer(props) {
           onPress={() => {
             props.screenProps.setIsDirectionDetailsTo(true);
           }}>
-          <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <View
+            style={{
+              justifyContent: aligns.center,
+              alignItems: aligns.center,
+            }}>
             <Text style={styles.title}>LEAVE AT</Text>
             <Text style={styles.time}>
               {props.screenProps.departureTimeInfo.text}
@@ -78,7 +83,7 @@ export default function AlarmTimer(props) {
               style={iconStyleArr}
               name="bell"
               size={30}
-              color="#ff9d0a"
+              color={colors.orange}
             />
             <Text style={timersListArr}>{alarmTimers.join(' | ')}</Text>
           </View>
@@ -101,48 +106,48 @@ const styles = StyleSheet.create({
     marginTop: 20,
     paddingBottom: 30,
     paddingHorizontal: 10,
-    backgroundColor: '#000',
+    backgroundColor: colors.blank,
   },
   switchWrapper: {
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: aligns.center,
     flexDirection: 'row',
-    borderColor: 'rgb(99,99,102)',
+    borderColor: colors.gray,
     borderTopWidth: 1,
     borderBottomWidth: 1,
     paddingVertical: 10,
     marginBottom: screenRatio * 0.01,
   },
   switchTitle: {
-    color: '#fff',
+    color: colors.white,
     fontWeight: '500',
     fontSize: 20,
   },
   title: {
     fontSize: height / 20,
-    textAlign: 'center',
+    textAlign: aligns.center,
     marginBottom: screenRatio * 0.005,
-    color: '#fff',
+    color: colors.white,
   },
   time: {
     fontSize: height / 30,
-    textAlign: 'center',
+    textAlign: aligns.center,
     marginBottom: screenRatio * 0.005,
-    color: '#fff',
+    color: colors.white,
   },
   hour: {
     fontSize: height / 15,
-    textAlign: 'center',
+    textAlign: aligns.center,
     fontWeight: '700',
     marginBottom: screenRatio * 0.005,
-    color: '#fff',
+    color: colors.white,
   },
   timersList: {
     width: width * 0.9,
     fontSize: height / 30,
-    textAlign: 'center',
+    textAlign: aligns.center,
     marginBottom: screenRatio * 0.005,
-    color: '#ff9d0a',
+    color: colors.orange,
   },
   bellIcon: {
     width: 30,
@@ -154,6 +159,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   gray: {
-    color: 'rgb(99,99,102)',
+    color: colors.gray,
   },
 });

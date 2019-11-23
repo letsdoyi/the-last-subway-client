@@ -11,6 +11,7 @@ import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import common from '../Constants/common';
 import LocationItem from './LocationItem';
 import credentials from '../credentials';
+import { colors } from '../Constants/styles';
 
 const { CURRENT_LOCATION } = common;
 const { GOOGLE } = credentials;
@@ -25,19 +26,19 @@ const styles = StyleSheet.create({
   },
   inputIconSetWrapper: {
     flexDirection: 'row',
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
   },
   textInput: {
     width: '90%',
     height: 35,
     margin: 3,
-    color: '#fff',
+    color: colors.white,
   },
   backgroudColorLightGray: {
-    backgroundColor: 'rgba(0,0,0,.7)',
+    backgroundColor: colors.backgroundLightGray,
   },
   backgroudColorDarkGray: {
-    backgroundColor: 'rgba(0,0,0,.8)',
+    backgroundColor: colors.backgroundDarkGray,
   },
   fromIcon: {
     width: '10%',
@@ -67,7 +68,7 @@ export default function MapInput(props) {
                 style={styles.fromIcon}
                 name="dot-single"
                 size={38}
-                color={'#0a84ff'}
+                color={colors.iosBlue}
               />
               <TextInput
                 style={[styles.textInput]}
@@ -77,7 +78,7 @@ export default function MapInput(props) {
                   handleTextChange(fromInputValue);
                 }}
                 placeholder={CURRENT_LOCATION}
-                placeholderTextColor={'#0a84ff'}
+                placeholderTextColor={colors.iosBlue}
               />
             </View>
             <ScrollView style={{ maxHeight: 100 }}>
@@ -111,14 +112,14 @@ export default function MapInput(props) {
                 style={styles.fromIcon}
                 name="square-medium-outline"
                 size={38}
-                color={'#fff'}
+                color={colors.white}
               />
               <TextInput
                 style={styles.textInput}
                 value={screenProps.to.value || inputValue}
                 onChangeText={handleTextChange}
                 placeholder={'Where to?'}
-                placeholderTextColor={'#fff'}
+                placeholderTextColor={colors.white}
               />
             </View>
             <ScrollView style={{ maxHeight: 100 }}>

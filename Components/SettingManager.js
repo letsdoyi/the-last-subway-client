@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
+import { colors, aligns } from '../Constants/styles';
 
 export default function SettingManager(props) {
   return (
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
   container: {
     height: height * 0.10,
     top: 55,
-    backgroundColor: '#000',
+    backgroundColor: colors.black,
     justifyContent: 'space-between',
     alignItems: 'flex-end',
     flexDirection: 'row',
@@ -45,8 +46,8 @@ const styles = StyleSheet.create({
   },
   element: {
     fontSize: height / 50,
-    textAlign: 'center',
+    textAlign: aligns.center,
     marginBottom: screenRatio * 0.005,
-    color: '#ff9d0a',
+    color: colors.orange,
   },
 });

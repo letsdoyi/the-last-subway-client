@@ -2,6 +2,7 @@ import React from 'react';
 import MyMapContainer from './MyMapContainer';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { Button } from 'react-native-elements';
+import { colors } from '../Constants/styles';
 
 export default function SetLocation(props) {
   const { containerWrapper } = styles;
@@ -19,7 +20,7 @@ export default function SetLocation(props) {
   ) {
     button = (
       <Button
-        buttonStyle={{ backgroundColor: '#000' }}
+        buttonStyle={{ backgroundColor: colors.black }}
         titleStyle={{ fontWeight: '500' }}
         title="DONE"
         onPress={() => {
@@ -31,7 +32,7 @@ export default function SetLocation(props) {
   }
   return (
     <View style={containerWrapper}>
-      <MyMapContainer style={{}} screenProps={props.screenProps} />
+      <MyMapContainer screenProps={props.screenProps} />
       <View style={styles.buttonTomultipleSelection}>{button}</View>
     </View>
   );
@@ -64,6 +65,6 @@ const styles = StyleSheet.create({
     bottom: '5%',
     transform: [{ translateX: -Dimensions.get('window').width * 0.45 }],
     width: '90%',
-    color: '#fff',
+    color: colors.white,
   },
 });
