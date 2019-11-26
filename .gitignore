@@ -17,7 +17,7 @@ web-report/
 credentials.js
 
 #environment
-environment
+environment.js
 
 #e2e
 bin
