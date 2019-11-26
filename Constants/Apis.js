@@ -5,7 +5,10 @@ const GOOGLE_API = {
     MODE: { TRANSIT: 'transit' },
     TRANSIT_MODE: { SUBWAY: 'subway' },
     LANGUAGE: { KO: 'ko', EN: 'en' },
-    TRANSIT_ROUTING_PREFERENCE: { FEWER_TRANSFERS: 'fewer_transfers', LESS_WALKING:'less_walking' },
+    TRANSIT_ROUTING_PREFERENCE: {
+      FEWER_TRANSFERS: 'fewer_transfers',
+      LESS_WALKING: 'less_walking',
+    },
   },
   GEOCODE: {
     URL: 'https://maps.googleapis.com/maps/api/geocode/json',
