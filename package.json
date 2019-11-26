@@ -14,11 +14,23 @@
       "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|sentry-expo|native-base)"
     ]
   },
+  "detox": {
+    "test-runner": "jest",
+    "configurations": {
+      "ios.sim": {
+        "binaryPath": "bin/Exponent.app",
+        "name": "iPhone 11 Pro Max",
+        "type": "ios.simulator"
+      }
+    }
+  },
   "devtools": "react-devtools",
   "dependencies": {
     "@expo/vector-icons": "^10.0.6",
+    "add": "^2.0.6",
     "axios": "^0.19.0",
     "expo": "^35.0.0",
+    "expo-detox-hook": "^1.0.10",
     "expo-location": "~7.0.0",
     "expo-permissions": "~7.0.0",
     "moment": "^2.24.0",
@@ -32,22 +44,26 @@
     "react-native-maps": "~0.25.0",
     "react-native-multiple-select": "^0.5.3",
     "react-native-step-indicator": "0.0.11",
+    "react-native-testing-library": "^1.11.1",
     "react-native-web": "^0.11.7",
     "react-navigation": "^4.0.10",
     "react-navigation-animated-switch": "^0.3.2",
     "react-navigation-stack": "^1.10.3",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
+    "react-test-renderer": "^16.12.0",
     "redux": "^4.0.4",
-    "watchman": "^1.0.0"
+    "watchman": "^1.0.0",
+    "yarn": "^1.19.1"
   },
   "devDependencies": {
     "babel-preset-expo": "^7.1.0",
-    "redux-devtools-extension": "^2.13.8",
+    "detox": "^14.7.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "jest-enzyme": "^7.1.2",
-    "jest-expo": "^35.0.0"
+    "jest-expo": "^35.0.0",
+    "redux-devtools-extension": "^2.13.8"
   },
   "prettier": {
     "trailingComma": "es5",
