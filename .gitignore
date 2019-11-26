@@ -16,6 +16,9 @@ web-report/
 #credentials
 credentials.js
 
+#data
+seoulsubway_info.json
+
 #environment
 environment.js
 
