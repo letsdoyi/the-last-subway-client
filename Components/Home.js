@@ -89,10 +89,6 @@ export default function Home(props) {
       const milisecondsOfoneDay = 1000 * 60 * 60 * 24;
       const tomorrow2amUnitSecond =
         (new Date().setHours(2, 0, 0, 0) + milisecondsOfoneDay) / 1000;
-      // console.log(
-      //   'tomorrow2am vscode에서는 왜 다르게 나오는지 질문하기:',
-      //   new Date(tomorrow3amUnitsecond * 1000)
-      // );
       if (
         todayUnitSecond >= today12amUnitSecond &&
         todayUnitSecond <= today2amUnitSecond
@@ -118,7 +114,7 @@ export default function Home(props) {
             transit_routing_preference:
               TRANSIT_ROUTING_PREFERENCE.FEWER_TRANSFERS,
             arrival_time: `${timeUnitSecond}`,
-            language: LANGUAGE.KO,
+            language: LANGUAGE,
             key: GOOGLE.APIKEY,
           },
         });

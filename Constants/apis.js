@@ -4,7 +4,7 @@ const GOOGLE_API = {
     URL: 'https://maps.googleapis.com/maps/api/directions/json',
     MODE: { TRANSIT: 'transit' },
     TRANSIT_MODE: { SUBWAY: 'subway' },
-    LANGUAGE: { KO: 'ko', EN: 'en' },
+    LANGUAGE: 'en',
     TRANSIT_ROUTING_PREFERENCE: {
       FEWER_TRANSFERS: 'fewer_transfers',
       LESS_WALKING: 'less_walking',
@@ -12,6 +12,6 @@ const GOOGLE_API = {
   },
   GEOCODE: {
     URL: 'https://maps.googleapis.com/maps/api/geocode/json',
-    LANGUAGE: 'ko',
+    LANGUAGE: 'en',
   },
 };
